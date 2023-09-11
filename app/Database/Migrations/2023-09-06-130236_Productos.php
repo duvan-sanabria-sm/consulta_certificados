@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Retie extends Migration
+class Productos extends Migration
 {
     public function up()
     {
@@ -13,31 +13,42 @@ class Retie extends Migration
             'certificado' => [
                 'type' => 'INT',
                 'constraint' => 5,
+                'unsigned' => true,
                 'auto_increment' => false,
             ],
 
             'nombre' => [
                 'type' => 'VARCHAR',
                 'constraint' => 15,
+                'unsigned' => true,
             ],
 
-            'capacitacion' => [
+            'solicitante' => [
+                'type' => 'VARCHAR',
+                'constraint' => 30,
+                'unsigned' => true,
+            ],
+
+            'normas' => [
                 'type' => 'VARCHAR',
                 'constraint' => 20,
+                'unsigned' => true,
             ],
 
-            'fecha' => [
-                'type' => 'TIMESTAMP',
+            'estado' => [
+                'type' => 'VARCHAR',
+                'constraint' => 20,
+                'unsigned' => true,
             ],
 
         ]);
 
         $this->forge->addKey('certificado');
-        $this->forge->createTable('retie');
+        $this->forge->createTable('productos');
     }
 
     public function down()
     {
-        $this->forge->dropTable('retie');
+        //
     }
 }

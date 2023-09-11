@@ -3,7 +3,7 @@
 /*Todas las vistas*/
 *{
     font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 21px;
     color: #1e384c;
 }
@@ -37,10 +37,6 @@ i{margin-bottom: 5px}
     }
 }
 
-/*Vista header*/
-nav{
-    background-color: #0295e0;
-}
 
 /*Vista footer*/
 .footer p {
@@ -55,7 +51,7 @@ nav{
 
 /*Vista certificates y retie*/
 .button,i{
-    background-color: #0295e0;
+    background-color: #0971b7;
     display: inline-block;
     font-weight: 400;
     color: #fcf8f8;
@@ -76,7 +72,15 @@ nav{
 
 
 label{
-    font-size: 22px;
+    font-size: 15px;
     color:#666666;
     font-weight: bold;
+}
+
+.card-body {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+    color: var(--bs-card-color);
 }

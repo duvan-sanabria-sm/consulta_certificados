@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" id="templatemo_nav_top">
+<nav class="navbar navbar-expand-lg navbar-light d-none d-lg-block" id="templatemo_nav_top" style="background-color: #0971b7;">
         <div class="container text-light">
             <div class="w-100 d-flex justify-content-between">
                 <div>

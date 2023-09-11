@@ -8,7 +8,7 @@ class Home extends BaseController
     {
 
         return view('dashboard/header').
-               view('dashboard/certificates').
+               view('roles/users/main').
                view('dashboard/footer');
     }
 }

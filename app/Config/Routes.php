@@ -7,11 +7,11 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 
-//Ruta Retie
-$routes->get('retie', 'ServiceController::showView');
+//Rutas Admin
+$routes->get('ingreso', 'LoginController::showViewLogin');
 
-//Ruta Productos
-$routes->get('productos','ServiceController::showViewProducts');
+$routes->get('home','AdminController::showViewMain');
 
-//Ruta SIG
-$routes->get('sig','ServiceController::showViewSIG');
+
+service('auth')->routes($routes);
+

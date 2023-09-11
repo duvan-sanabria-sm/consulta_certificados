@@ -6,7 +6,9 @@
         <title>Certificados</title>
         <link rel="stylesheet" href="<?php echo base_url('assets/styles.css')?>">
         <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css')?>" type="text/css">
-        <link rel="icon" sizes="192x192" href="https://static.wixstatic.com/media/a73dca_6e625a624d1b4599be1ba20420159836%7Emv2.png/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/a73dca_6e625a624d1b4599be1ba20420159836%7Emv2.png">
+        <!--Estilos plantillas login-->
+        <link rel="stylesheet" href="<?php echo base_url('assets/modernize/styles.css')?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/modernize/styles.min.css')?>">
 </head>
 <body>
         <?= $this->renderSection('content')?>
