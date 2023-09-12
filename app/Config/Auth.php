@@ -29,7 +29,7 @@ class Auth extends ShieldAuth
      * ////////////////////////////////////////////////////////////////////
      */
     public array $views = [
-        'login'                       => '\roles\admin\login',
+        'login'                       => '\CodeIgniter\Shield\Views\login',
         'register'                    => '\CodeIgniter\Shield\Views\register',
         'layout'                      => '\CodeIgniter\Shield\Views\layout',
         'action_email_2fa'            => '\CodeIgniter\Shield\Views\email_2fa_show',
@@ -63,13 +63,13 @@ class Auth extends ShieldAuth
      * @var array<string, string>
      */
     public array $tables = [
-        'users'             => 'users',
-        'identities'        => 'auth_identities',
-        'logins'            => 'auth_logins',
-        'token_logins'      => 'auth_token_logins',
-        'remember_tokens'   => 'auth_remember_tokens',
-        'groups_users'      => 'auth_groups_users',
-        'permissions_users' => 'auth_permissions_users',
+        'users'             => 'usuarios',
+        'identities'        => 'identidades_autenticacion',
+        'logins'            => 'acceso_autenticacion',
+        'token_logins'      => 'acceso_tokens_autenticacion',
+        'remember_tokens'   => 'acceso_tokens_recordatorio',
+        'groups_users'      => 'acceso_grupo_usuarios',
+        'permissions_users' => 'acceso_permisos_usuarios',
     ];
 
     /**
@@ -88,7 +88,7 @@ class Auth extends ShieldAuth
      */
     public array $redirects = [
         'register'    => '/',
-        'login'       => 'home',
+        'login'       => '/',
         'logout'      => 'login',
         'force_reset' => '/',
     ];

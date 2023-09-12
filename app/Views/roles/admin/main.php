@@ -17,12 +17,15 @@
                         <div class="card-body">
                                 <h4 class="card-title">Bienvenido a la consulta de Capacitación de SERVIMETERS</h4>
                                 <p class="card-description">Por favor ingrese su documentos</p>
-                                <form>
+        
+                                <?php $data = array("id" => "frm_import",'enctype'=> 'multipart/form-data'); 
+                                      helper('form');
+                                echo form_open('envio',$data);?>
                                         <div class="mb-3">
-                                                <input type="file" class="form-control" id="archivo">
+                                                <input type="file" class="form-control" name="file_excel" id="archivo" required>
                                         </div>
                                         <button type="submit" class="btn" style="background-color:#0971b7; color:white">Subir Archivo</button>
-                                </form>
+                                <?php echo form_close();?>
                         </div>
                 </div>
         </div>
