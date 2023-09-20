@@ -44,8 +44,7 @@
                         </thead>
                         <tbody id="tablaDatos">
                                 <!-- Aquí se agregarán las filas de datos -->
-                        </tbody>
-                        
+                        </tbody> 
                 </table>
                 
         </div>

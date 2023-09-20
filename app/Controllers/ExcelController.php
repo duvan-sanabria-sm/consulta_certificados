@@ -1,69 +1,53 @@
 <?php 
-namespace App\Controllers;
-
-use CodeIgniter\Controller;
-
-//Ayudará a identificar el tipo de petición
-use CodeIgniter\HTTP\IncomingRequest;
-
-use PhpOffice\PhpSpreadsheet\IOFactory;
-
-//Ayudará para instanciar la conexión y crear un builder para insertar datos en la tabla
-use CodeIgniter\Database\Query;
-use RuntimeException;
-
-class ExcelController extends Controller{
-
-        public function import(){
-                helper(['form','url']);
-                if($this->request->getMethod()== 'post'){
-                        $ruta = 'uploads/';
-                        if(!is_dir($ruta)){
-                                mkdir($ruta,0755);
-                        }
-
-                        $file = $this->request->getFile('file_excel');
-                        if(!$file->isValid()){
-                                throw new RuntimeException($file->getErrorString().'('.$file->getError().')');
-                        }
-                        else{
-                                $name_file = $file->getName();
-                                $file->move($ruta);
-
-                                if($file->hasMoved()){
-
-                                        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
-                                        
-                                        $spreadsheet = $reader->load($ruta.$name_file);
-                                        $sheet = $spreadsheet->getSheet(0);
-
-                                        $db = \Config\Database::connect();
-                                        $builder = $db->table('retie');
-
-                                        $number_products = 0;
-                                        $imported_products = 0;
-                                        $arr_errors = [];
-                                        $arr_data_products = [];
-
-                                        foreach($sheet->getRowIterator(2) as $row){
-                                                $description = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
-                                                $stock = trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex()));
-                                                
-                                                if($description == '' || $stock == '')
-                                                continue;
-        
-                                                $data_product = ['nombre'=>$description, 'capacitacion'=>$stock];
-                                                $arr_data_products[] = $data_product;
-                                                $number_products++;
-                                        }
-
-                                        $imported_products = $builder->insertBatch($arr_data_products);
-                                        $data['imported_products'] = $imported_products;
-                                        $data['number_products'] = $number_products;
-                                        return view('roles/admin/main',$data);
-                                }
-                        }    
+        namespace App\Controllers;
+        use App\Models\Excel;
+        use CodeIgniter\Controller;
+        class ExcelController extends Controller{
+                
+                public function __construct() {
+                        helper(['form','url']);
                 }
-        }
-               
-}
+
+                public function import(){
+
+                        if($this->request->getMethod()== 'post'){
+
+                                $file = $this->request->getFile('excel_file');
+                                
+                               
+                                if($file->isValid()){
+                                        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
+
+                                        try {
+                                                if($file->getClientExtension() == "xlsx"){
+                                                        $spreadsheet = $reader->load($file->getTempName());
+                                                        $sheet = $spreadsheet->getSheet(0);
+
+                                                        $excelModel = new Excel();
+                                                        $resultData = $excelModel->importDataExcel($sheet);
+                        
+                                                        return $this->response->setJSON([
+                                                                'resultado_insertar' => $resultData,
+                                                                'respuesta' => 'Los datos se insertaron correctamente'
+                                                        ]);
+                                                }
+                                                else{
+                                                        return "Solo se aceptan archivos de xlsx";
+                                                }
+                                        }catch (\PhpOffice\PhpSpreadsheet\Reader\Exception $e) {
+                                                $error = $e->getMessage();
+                                                $error = 'Error al cargar el archivo Excel: ' . $e->getMessage();
+                                                return $error;
+                                        }
+                                }else{
+                                        $error = 'El archivo no es válido.';
+                                        return "error";
+                                        //return redirect()->route('home');
+                                }
+                        }else{
+                                $error ="bien";
+                                $data = ["error" => $error];
+                                return view('roles/admin/main',$data);
+                        }
+                }
+        }       

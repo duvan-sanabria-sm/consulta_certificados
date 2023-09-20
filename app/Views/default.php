@@ -17,5 +17,6 @@
         <script type="text/javascript" src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js')?>"></script>
         <script src="https://kit.fontawesome.com/ad7d17c265.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url('assets/request/ajax.js')?>"></script>
+        <script src="<?php echo base_url('assets/request/excel.js')?>"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?= $this->extend('default')?>
+
 <?=$this->section('content')?>
 <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
                 <div class="container py-5">
@@ -18,16 +19,19 @@
                                 <h4 class="card-title">Bienvenido a la consulta de Capacitación de SERVIMETERS</h4>
                                 <p class="card-description">Por favor ingrese su documentos</p>
         
-                                <?php $data = array("id" => "frm_import",'enctype'=> 'multipart/form-data'); 
-                                      helper('form');
-                                echo form_open('envio',$data);?>
+                               
                                         <div class="mb-3">
-                                                <input type="file" class="form-control" name="file_excel" id="archivo" required>
+                                                <input type="file" class="form-control" name="file_excel" id="file" required>
                                         </div>
-                                        <button type="submit" class="btn" style="background-color:#0971b7; color:white">Subir Archivo</button>
-                                <?php echo form_close();?>
+                                        <div class="mb-3">
+                                                <div id="errorText" style="color: red;"></div>
+                                                <div id="successText" style="color: green;"></div>
+
+                                        </div>
+                                        <button type="button" class="btn-send" style="background-color:#0971b7; color:white">Subir Archivo</button>
                         </div>
                 </div>
+                
         </div>
 </div>
 <?=$this->endSection('content');?>

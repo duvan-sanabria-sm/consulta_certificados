@@ -3,17 +3,20 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
-class Retie extends Migration
+
+class Certificate extends Migration
 {
     public function up()
     {
         $this->forge->addField([
 
-            'certificado' => [
+            'no_certificado' => [
                 'type' => 'INT',
                 'constraint' => 5,
-                'auto_increment' => false,
+                'unsigned'       => true,
+                'unique'         => true,
             ],
 
             'nombre' => [
@@ -28,16 +31,19 @@ class Retie extends Migration
 
             'fecha' => [
                 'type' => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
             ],
 
         ]);
 
-        $this->forge->addKey('certificado');
-        $this->forge->createTable('retie');
+        $this->forge->addKey('no_certificado',true,true);
+        $this->forge->createTable('certificado');
     }
 
-    public function down()
-    {
-        $this->forge->dropTable('retie');
+    public function down(){
+
+        if ($this->forge->dropDatabase('certificado')) {
+            echo 'Base de Datos Eliminada!';
+        }
     }
 }
