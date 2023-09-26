@@ -17,22 +17,22 @@
 <div class="container">
         <div class="row">
                 <div class="col-md">
-                        <div>
-                                <div class="card-body">
-                                        <h5 class="card-title">Bienvenido a la consulta de Capacitación de SERVIMETERS</h5>
-                                        <p class="card-description">Por favor indique su número de certificado</p>
-                                        <form class="form-inline">
-                                                <input type="text" class="form-control mb-2 mr-sm-2" id="identifier" placeholder="Ingresa número certificado">
-                                                <i class="fa-solid fa-magnifying-glass" id="send"></i>
-                                        </form>
-                                </div>
+                        <div class="card-body">
+                                <h5 class="card-title">Bienvenido a la consulta de Capacitación de SERVIMETERS</h5>
+                                <p class="card-description">Por favor indique su número de certificado</p>
+                                <form class="form-inline">
+                                        <input type="text" class="form-control mb-2 mr-sm-2" id="identifier" placeholder="Ingresa número certificado">
+                                        <i class="fa-solid fa-magnifying-glass" id="send"></i>
+                                </form>
+                                <div id="errorText" style="color: red;"></div>
                         </div>
                 </div>
         </div>
 </div>
 
 <div class="container">
-        <div id="resultado">
+        <div id="main-table" style="display: none;">
+                
                 <table class="table">
                         <thead>
                                 <tr>
@@ -42,8 +42,9 @@
                                         <th>Fecha</th>
                                 </tr>
                         </thead>
-                        <tbody id="tablaDatos">
+                        <tbody id="tablaDatos">    
                                 <!-- Aquí se agregarán las filas de datos -->
+
                         </tbody> 
                 </table>
                 

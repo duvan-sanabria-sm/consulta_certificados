@@ -1,8 +1,8 @@
 'use strict';
-
 class Excel {
 
     constructor(){
+
         //Property
         this.inputFile = $("#file");
         this.form = "";
@@ -19,11 +19,11 @@ class Excel {
             if(this.inputFile.length > 0){
                 $('#errorText').text('');
                 this.files = event.target.files[0];
-
             }
         });
 
         $('.btn-send').on("click",() => {
+
             var value = this.inputFile.val();
             
             if($.trim(value)==''){
@@ -48,14 +48,12 @@ class Excel {
 
         $.ajax({
             url: 'envio',
-            dataType: "json",
             type: 'post',
             data: this.form,
             processData: false,
             contentType: false,
             success: function(response){
-              console.log([response["imported_certificates"],response['number_certificates']]);   
-              $('#successText').text(response.respuesta);
+              $('#successText').text(response);
             },
             error: function(error) {
                 console.error('Error en la solicitud:', error);
@@ -64,5 +62,4 @@ class Excel {
     }
 
 }
-
 const file = new Excel();

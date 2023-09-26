@@ -5,17 +5,20 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
 
-//Rutas Admin
-$routes->get('ingreso', 'LoginController::showViewLogin');
+ //Rutas user
+$routes->get('/', 'User::index');
 
-$routes->get('home','AdminController::showViewMain');
+//Rutas admin
+$routes->group('admin', function($routes) { //1.
+    $routes->get('login', 'LoginController::showViewLogin');
+    $routes->get('home', 'AdminController::showViewHome');
+    $routes->post('envio', 'ExcelController::import');
 
-$routes->post('envio', 'ExcelController::import');
+});
 
-//Rutas Post Admin
 $routes->get('consulta','RequestController::manageCertificateQuery');
 
+//Rutas shield
 service('auth')->routes($routes);
 

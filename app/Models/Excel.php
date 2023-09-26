@@ -2,71 +2,68 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Ramsey\Uuid\Uuid;
 
 class Excel extends Model{
-   
+
+    //Propiedades
     protected $table = 'certificado';
-    
-    function importDataExcel($sheet) {
+    protected $db;
+    protected $primaryKey = 'no_certificado';
+
+
+    //Constructor de Inicialización
+    public function __construct(){
+
+        parent::__construct();
+    }
         
+
+   //Método para insertar datos para la llave principal por defecto como UUID
+    public function insertWidthUUID(){
+
+        $uuid =  Uuid::uuid4()->toString();
+        $data = ['no_certificado' => $uuid];
+        return $data['no_certificado'];
+    }
+
+    
+    //Método para insertar datos desde el excel
+    function importDataExcel($sheet) {
+    
         $db = \Config\Database::connect();
-        $builder = $db->table('certificado');
+        $builder = $db->table($this->table);
 
         $number_certificates = 0;
         $imported_certificates = 0;
         $arr_data_certificates = [];
 
-        if($sheet->getHighestRow()< 2){
+        if($sheet->getHighestRow()<2){
 
             return "Error: Los archivos deben contenerse en la primera hoja";
         }else{
 
             foreach($sheet->getRowIterator(2) as $row){
-                $no_certificates = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
-                $name = trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex()));
                 
-                if($no_certificates == '' || $name == ''){
+                $model = new \App\Models\Excel();
+                //$no_certificates = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
+                $no_certificates = $model->insertWidthUUID();
+                $name = trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex()));
+                $capacitation = trim($sheet->getCellByColumnAndRow(3,$row->getRowIndex()));
+                
+                if($no_certificates == '' || $name == '' || $capacitation == ''){
                     continue;
                 }
 
-                $data_certificates = ['no_certificado'=>$no_certificates, 'nombre'=>$name];
+                $data_certificates = ['no_certificado'=>$no_certificates, 'nombre'=>$name, 'capacitacion'=> $capacitation];
                 $arr_data_certificates[] = $data_certificates;
                 $number_certificates++;
             }
         }
             
-            $model = new \App\Models\Excel();
-
-            $existing_certificates = $model->checkExistence($arr_data_certificates);
-
-            if (!empty($existing_certificates)) {
-                $existing_certificates_numbers = array_column($existing_certificates, 'no_certificado');
-                $message = "Los siguientes números de certificado ya existen en la base de datos: " . implode(', ', $existing_certificates_numbers);
-
-                return $message;
-            }else{
-                $imported_certificates = $builder->insertBatch($arr_data_certificates);
-                
-                $data['imported_certificates'] = $imported_certificates;
-                $data['number_certificates'] = $number_certificates;  
-                
-                return $data;
-               
-            }
-    }
-
-    public function checkExistence($arr_data_certificates){
-        $db = \Config\Database::connect();
-        $builder = $db->table('certificado');
-
-        $certificates_to_check = array_column($arr_data_certificates, 'no_certificado');
-
-        $builder->select('no_certificado');
-        $builder->whereIn('no_certificado', $certificates_to_check);
-        $query = $builder->get();
-
-        $existing_certificates = $query->getResultArray();
-
-        return $existing_certificates;
+        $imported_certificates = $builder->insertBatch($arr_data_certificates);
+        return $imported_certificates;       
     }
 }
+
+

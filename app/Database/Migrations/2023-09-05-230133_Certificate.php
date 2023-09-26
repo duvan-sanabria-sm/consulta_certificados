@@ -13,10 +13,8 @@ class Certificate extends Migration
         $this->forge->addField([
 
             'no_certificado' => [
-                'type' => 'INT',
-                'constraint' => 5,
-                'unsigned'       => true,
-                'unique'         => true,
+                'type' => 'VARCHAR',
+                'constraint' => 20,
             ],
 
             'nombre' => [
@@ -42,7 +40,7 @@ class Certificate extends Migration
 
     public function down(){
 
-        if ($this->forge->dropDatabase('certificado')) {
+        if ($this->forge->dropTable('certificado')) {
             echo 'Base de Datos Eliminada!';
         }
     }

@@ -25,11 +25,14 @@
 
                                                         $excelModel = new Excel();
                                                         $resultData = $excelModel->importDataExcel($sheet);
+
+                                                        if($resultData){
+                                                                return "¡Felicidades! Los registros se han importado correctamente en la base de datos.";    
+                                                        }else{
+                                                                return "Lo siento, no fue posible insertar los registros en la base de datos.";
+                                                        }
                         
-                                                        return $this->response->setJSON([
-                                                                'resultado_insertar' => $resultData,
-                                                                'respuesta' => 'Los datos se insertaron correctamente'
-                                                        ]);
+                                                        
                                                 }
                                                 else{
                                                         return "Solo se aceptan archivos de xlsx";

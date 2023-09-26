@@ -16,6 +16,9 @@ class RequestController extends Controller{
 
                 return $this->response->setJSON($queries);
 
+
+                
+
         }
 
 }

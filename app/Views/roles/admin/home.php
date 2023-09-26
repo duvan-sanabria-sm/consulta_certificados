@@ -26,9 +26,8 @@
                                         <div class="mb-3">
                                                 <div id="errorText" style="color: red;"></div>
                                                 <div id="successText" style="color: green;"></div>
-
                                         </div>
-                                        <button type="button" class="btn-send" style="background-color:#0971b7; color:white">Subir Archivo</button>
+                                        <button type="button" class="btn-send btn" style="background-color:#0971b7; color:white">Subir Archivo</button>
                         </div>
                 </div>
                 
