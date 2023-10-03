@@ -1,5 +1,6 @@
-<div class="container-fluid">
-                     <div class="footer">
-                        <p>Copyright © 2022 Servimeters, Todos los derechos reservados.<br><br></p>
-                     </div>
-</div>
+
+<footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+    </div>
+    <strong>Copyright &copy; 2022 <a href="https://www.servimeters.com/">Servimeters</a>,</strong> Todos los derechos reservados.
+  </footer>

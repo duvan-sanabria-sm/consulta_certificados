@@ -14,7 +14,7 @@ class AuthGroups extends ShieldAuthGroups
      * --------------------------------------------------------------------
      * The group that a newly registered user is added to.
      */
-    public string $defaultGroup = 'user';
+    public string $defaultGroup = 'customer';
 
     /**
      * --------------------------------------------------------------------
@@ -66,7 +66,7 @@ class AuthGroups extends ShieldAuthGroups
         'customer.access'         => 'Can access certificate queries',
         'dataManager.access'      => 'Can access the login',
         'dataManager.create'      => 'Can import data from excel',
-        'admin.access'            => 'Can access the login',
+        'admin.access'            => 'Can access the website',
         'admin.manage-admin'      => 'Can access modify other roles',
        
         /*'users.manage-admins' => 'Can manage other admins',

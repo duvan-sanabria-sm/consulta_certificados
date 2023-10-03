@@ -4,18 +4,22 @@
 *{
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
-    line-height: 21px;
-    color: #1e384c;
-}
+    line-height: 21px;  
+ }
 
-/*Vista retie*/
-
-i{margin-bottom: 5px}
+/*Vista header*/
+i{ color: #fcf8f8;}
 
 .page-header {
         background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(http://localhost:8080/assets/img/fondo.jpg);
         background-size: cover;
 }
+
+/*Vista sidebar*/
+.nav-links.active{
+    background-color: #494e53;
+}
+
 
 .py-5 {
     padding-top: 3rem !important;
@@ -49,11 +53,10 @@ i{margin-bottom: 5px}
     padding: 25px 15px;
 }
 
-/*Vista certificates y retie*/
-.button,i{
+
+#send{
     background-color: #0971b7;
     display: inline-block;
-    font-weight: 400;
     color: #fcf8f8;
     text-align: center;
     vertical-align: middle;
@@ -70,6 +73,9 @@ i{margin-bottom: 5px}
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+.fa-solid, .fas {
+    font-weight: 900;
+}
 
 label{
     font-size: 15px;
@@ -84,3 +90,4 @@ label{
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
     color: var(--bs-card-color);
 }
+

@@ -3,8 +3,6 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-use CodeIgniter\Database\RawSql;
-
 
 class Certificate extends Migration
 {
@@ -28,8 +26,7 @@ class Certificate extends Migration
             ],
 
             'fecha' => [
-                'type' => 'TIMESTAMP',
-                'default' => new RawSql('CURRENT_TIMESTAMP'),
+                'type' => 'VARCHAR',	
             ],
 
         ]);

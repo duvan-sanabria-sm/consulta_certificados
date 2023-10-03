@@ -12,15 +12,18 @@ class AdminController extends Controller{
                     $user = auth()->user(); // Obtener el usuario autenticado
                     if ($user->email === 'duvan.sanabriam@gmail.com') {
 
-                        return view('dashboard/header').
-                        view('roles/admin/register').
-                        view('dashboard/footer');
+                        return view('dashboard/header'). 
+                               view('dashboard/sidebar').
+                               view('roles/admin/register').
+                               view('dashboard/footer');
 
 
                     } else  {
-                        return view('dashboard/header').
-                        view('roles/admin/home').
-                        view('dashboard/footer');
+                        
+                        return view('dashboard/header'). 
+                               view('dashboard/sidebar').
+                               view('roles/admin/home').
+                               view('dashboard/footer');
                     }
                 } else {
                         return view('roles/admin/login');

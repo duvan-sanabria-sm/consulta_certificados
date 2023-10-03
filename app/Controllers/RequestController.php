@@ -15,10 +15,5 @@ class RequestController extends Controller{
                 $queries = $certificate->certificaredConsultations($id);
 
                 return $this->response->setJSON($queries);
-
-
-                
-
         }
-
 }

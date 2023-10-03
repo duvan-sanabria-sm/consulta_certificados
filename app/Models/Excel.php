@@ -46,8 +46,8 @@ class Excel extends Model{
             foreach($sheet->getRowIterator(2) as $row){
                 
                 $model = new \App\Models\Excel();
-                //$no_certificates = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
-                $no_certificates = $model->insertWidthUUID();
+                $no_certificates = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
+                //$no_certificates = $model->insertWidthUUID();
                 $name = trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex()));
                 $capacitation = trim($sheet->getCellByColumnAndRow(3,$row->getRowIndex()));
                 
