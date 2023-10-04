@@ -5,30 +5,50 @@ use CodeIgniter\Controller;
 
 class AdminController extends Controller{
 
-        function showViewHome(): string {
-
+        function showViewHome(): string 
+        {
+            if (auth()->loggedIn()) 
+            {
+                $user = auth()->user(); 
+                    
                 if (auth()->loggedIn()) {
-                    // Verificar si el usuario tiene el correo específico
-                    $user = auth()->user(); // Obtener el usuario autenticado
-                    if ($user->email === 'duvan.sanabriam@gmail.com') {
-
-                        return view('dashboard/header'). 
-                               view('dashboard/sidebar').
-                               view('roles/admin/register').
-                               view('dashboard/footer');
-
-
-                    } else  {
                         
-                        return view('dashboard/header'). 
-                               view('dashboard/sidebar').
-                               view('roles/admin/home').
-                               view('dashboard/footer');
-                    }
-                } else {
-                        return view('roles/admin/login');
+                    return view('dashboard/header'). 
+                            view('dashboard/sidebar',['user' => $user]).
+                            view('roles/admin/home').
+                            view('dashboard/footer');
+                }else {
+                    
+                    return view('roles/acceso');
                 }
             }
+        }
+
+        function  showViewCreate(): string 
+        {
+            $user = auth()->user(); 
+
+            return 
+                            view('dashboard/header').
+                            view('dashboard/sidebar',['user' => $user]).
+                            view('roles/admin/create').
+                            view('dashboard/footer');
+
+
+                           
+        }
+
+        function  showViewDelete()
+        {
+            $user = auth()->user(); 
+
+            return view('dashboard/header'). 
+            view('dashboard/sidebar',['user' => $user]).
+            view('roles/admin/delete').
+                            view('dashboard/footer');
+                           
+        }
+        
             
         public function logout()
         {

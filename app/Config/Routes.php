@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 
  //Rutas user
-$routes->get('/', 'User::index');
+//routes->get('/', 'User::index');
 
 //Rutas admin
 /*
@@ -18,18 +18,7 @@ $routes->group('admin', function($routes) { //1.
 
 });*/
 
-$routes->group('admin', function($routes) { //1.
-    $routes->get('acceso', 'LoginController::showViewLogin');
-    $routes->get('ingreso', 'AdminController::showViewHome');
-    $routes->post('importar', 'ExcelController::import');
 
-});
-
-//Rutas usuario
-$routes->group('/', function($routes){
-    $routes->get('login', 'LoginController::showViewLogin');
-    $routes->get('consulta','RequestController::manageCertificateQuery');
-});
 
 //Rutas shield
 service('auth')->routes($routes);

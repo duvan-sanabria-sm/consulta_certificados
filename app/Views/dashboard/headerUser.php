@@ -13,10 +13,6 @@
                 <a class="text-light" href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin fa-sm fa-fw"></i></a>
             </div>
             <div>
-            <?php if (auth()->loggedIn()) { ?> 
-                <a href="<?= base_url('logout') ?>" class="btn-close btn-close-white ml-5"></a>
-            <?php } ?>      
-            </div>
         </div>
     </div>
 </nav>

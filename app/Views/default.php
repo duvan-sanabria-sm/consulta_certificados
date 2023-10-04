@@ -21,6 +21,10 @@
 <body>
         <?= $this->renderSection('content')?>
 
+        <div class="hold-transition login-page">
+                <?= $this->renderSection('contentLogin')?>
+        </div>
+
         <!-- Scripts JavaScript (cargados al final del cuerpo) -->
         <script type="text/javascript" src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js')?>"></script>
         <script src="<?php echo base_url('assets/adminlt3/js/adminlte.js')?>"></script>

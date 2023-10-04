@@ -24,6 +24,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'authorization' => \App\Filters\AuthorizationFilter::class,
+
     ];
 
     /**
@@ -66,5 +68,10 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+        'authorization' => [
+            'before' => ['admin/*'], // Aplicar el filtro antes de acceder a rutas en el grupo 'admin'
+        ],
+    
+    ];
 }

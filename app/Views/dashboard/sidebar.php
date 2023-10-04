@@ -8,7 +8,7 @@
     <div class="sidebar">
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="<?= route_to('/');?>" class="d-block">Duvan Camilo Sanabria</a>
+          <a href="<?= route_to('/');?>" class="d-block"><?= $user->username; ?></a>
       </div>
     </div>
 
@@ -18,16 +18,8 @@
         <!--Titulo menú-->
         <li class="nav-header">Panel de Administración</li>
           
-        <!--Lista de consulta de certificados-->
-        <li class="nav-links active">
-            <a href="<?= route_to('/');?>" class="nav-link">
-              <i class="fa-solid fa-book"></i>
-              <p> Consulta de certificados<span class="badge badge-info right"></p>
-            </a>
-        </li>
-
         <!--Lista de ingreso de certificados-->
-        <li class="nav-item">
+        <li class="nav-links active">
             <a href="<?= route_to('admin/ingreso');?>" class="nav-link">
               <i class="fa-solid fa-user-plus"></i>
               <p> Ingreso de certificados</p>
@@ -35,6 +27,7 @@
         </li>
     
         <!--Lista crud-->
+        <?php if ($user->inGroup('admin')) : ?>
         <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
@@ -42,6 +35,14 @@
             </a>
 
             <ul class="nav nav-treeview">
+            <!--Crear-->
+            <li class="nav-item">
+                <a href="<?= route_to('admin/crear');?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i><p>Creación</p>
+                </a>
+            </li>  
+
+
               <!--Consulta-->
               <li class="nav-item">
                 <a href="../mailbox/mailbox.html" class="nav-link">
@@ -66,6 +67,7 @@
               </li>
             </ul>
         </li>
+        <?php endif; ?>
       </ul>
     </nav>
   </div>
