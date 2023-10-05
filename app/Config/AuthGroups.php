@@ -14,7 +14,7 @@ class AuthGroups extends ShieldAuthGroups
      * --------------------------------------------------------------------
      * The group that a newly registered user is added to.
      */
-    public string $defaultGroup = 'dataManager';
+    public string $defaultGroup = 'user';
 
     /**
      * --------------------------------------------------------------------
@@ -32,26 +32,26 @@ class AuthGroups extends ShieldAuthGroups
      * @see https://github.com/codeigniter4/shield/blob/develop/docs/quickstart.md#change-available-groups for more info
      */
     public array $groups = [
+        'superadmin' => [
+            'title'       => 'Super Admin',
+            'description' => 'Complete control of the site.',
+        ],
         'admin' => [
             'title'       => 'Admin',
-            'description' => 'The one who will have control of all users',
+            'description' => 'Day to day administrators of the site.',
         ],
-        'dataManager' => [
-            'title'       => 'DataManager',
-            'description' => 'The one who imports said data into excel to be consulted by the customer.',
+        'developer' => [
+            'title'       => 'Developer',
+            'description' => 'Site programmers.',
         ],
-        'customer' => [
-            'title'       => 'Customer',
-            'description' => 'The one who can consult the certificates',
-        ],
-        /*'user' => [
+        'user' => [
             'title'       => 'User',
             'description' => 'General users of the site. Often customers.',
         ],
         'beta' => [
             'title'       => 'Beta User',
             'description' => 'Has access to beta-level features.',
-        ],*/
+        ],
     ];
 
     /**
@@ -63,17 +63,13 @@ class AuthGroups extends ShieldAuthGroups
      * If a permission is not listed here it cannot be used.
      */
     public array $permissions = [
-        'customer.access'         => 'Can access certificate queries',
-        'dataManager.access'      => 'Can access the login',
-        'dataManager.create'      => 'Can import data from excel',
-        'admin.access'            => 'Can access the website',
-        'admin.manage-admin'      => 'Can access modify other roles',
-       
-        /*'users.manage-admins' => 'Can manage other admins',
+        'admin.access'        => 'Can access the sites admin area',
+        'admin.settings'      => 'Can access the main site settings',
+        'users.manage-admins' => 'Can manage other admins',
         'users.create'        => 'Can create new non-admin users',
         'users.edit'          => 'Can edit existing non-admin users',
         'users.delete'        => 'Can delete existing non-admin users',
-        'beta.access'         => 'Can access beta-level features',*/
+        'beta.access'         => 'Can access beta-level features',
     ];
 
     /**
@@ -85,25 +81,19 @@ class AuthGroups extends ShieldAuthGroups
      * This defines group-level permissions.
      */
     public array $matrix = [
-        /*'superadmin' => [
+        'superadmin' => [
             'admin.*',
             'users.*',
             'beta.*',
-        ],*/
-
+        ],
         'admin' => [
             'admin.access',
-            'admin.manage-admin',
+            'users.create',
+            'users.edit',
+            'users.delete',
+            'beta.access',
         ],
-
-        'dataManager' => [
-            'admin.access',
-            'dataManager.create',
-        ],
-        'customer' => [
-            
-        ],
-        /*'developer' => [
+        'developer' => [
             'admin.access',
             'admin.settings',
             'users.create',
@@ -113,6 +103,6 @@ class AuthGroups extends ShieldAuthGroups
         'user' => [],
         'beta' => [
             'beta.access',
-        ],*/
+        ],
     ];
 }

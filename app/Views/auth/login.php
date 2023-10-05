@@ -1,6 +1,7 @@
 <?= $this->extend('default')?>
 
 <?=$this->section('contentLogin')?>
+<div class="hold-transition login-page">
 <div class="card card-outline card-primary">
         <div class="card-header">
             <div class="login-logo p-3">
@@ -54,8 +55,8 @@
                         </div>
                     </div>
                 </form>
-
-            </div>
         </div>
     </div>
+</div>
+
 <?=$this->endSection('contentLogin');?>

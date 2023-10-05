@@ -21,7 +21,7 @@
                           
                                         <div class="mb-3">
                                                 
-                                        <input type="file" class="form-control" id="inputGroupFile02">
+                                        <input type="file" class="form-control" id="file">
                                         </div>
                                         <div class="mb-3">
                                                 <div id="errorText" style="color: red;"></div>

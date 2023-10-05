@@ -31,41 +31,17 @@
         <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
-              <p>Usuarios<i class="fas fa-angle-left right"></i></p>
+              <p>Administrar Usuarios<i class="fas fa-angle-left right"></i></p>
             </a>
 
             <ul class="nav nav-treeview">
             <!--Crear-->
             <li class="nav-item">
                 <a href="<?= route_to('admin/crear');?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i><p>Creación</p>
+                  <i class="far fa-circle nav-icon"></i><p>Editar datos</p>
                 </a>
             </li>  
-
-
-              <!--Consulta-->
-              <li class="nav-item">
-                <a href="../mailbox/mailbox.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i><p>Consulta</p>
-                </a>
-              </li>
-
-              <!--Modificar-->
-              <li class="nav-item">
-                <a href="../mailbox/compose.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Modificar</p>
-                </a>
-              </li>
-
-              <!--Eliminar-->
-              <li class="nav-item">
-                <a href="../mailbox/read-mail.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Eliminar</p>
-                </a>
-              </li>
-            </ul>
+          </ul>
         </li>
         <?php endif; ?>
       </ul>

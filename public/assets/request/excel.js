@@ -22,7 +22,8 @@ class Excel {
             }
         });
 
-        $('.btn-send').on("click",() => {
+
+        $('#btn-send').on("click",() => {
 
             var value = this.inputFile.val();
             
@@ -47,7 +48,7 @@ class Excel {
     insert() {
 
         $.ajax({
-            url: 'envio',
+            url: 'importar',
             type: 'post',
             data: this.form,
             processData: false,

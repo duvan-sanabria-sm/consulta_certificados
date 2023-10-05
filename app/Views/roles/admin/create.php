@@ -6,74 +6,109 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Creación de Usuarios</h1>
+                    <h1>Editar Usuarios</h1>
                 </div>
             </div>
         </div>
     </section>
 
-
+    <!--Tabla de datos-->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-            <div class="col-md-12">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Formulario</h3>
-                    </div>
+            <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Usuario</th>
+                      <th>Correo</th>
+                      <th>Contraseña</th>
+                      <th>Grupo</th>
+                      <th>Editar</th>
+                      <th>Eliminar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($records as $record): ?>
+                        <tr>
+                            <td><?= $record['id']; ?></td>
+                            <td><?= $record['name']; ?></td>
+                            <td><?= $record['secret']; ?></td>
+                            <td><?= $record['secret2']; ?></td>
+                            <td><?= $record['grupo']; ?></td>
+                            <td>
+                                <i class="fa-solid fa-pen-to-square" class="btn btn-primary"
+                                data-toggle="modal" data-target="#editarModal<?= $record['id']; ?>"
+                                style="color: #0971b7;"></i>
+                            </td>
 
-                    <form action="<?= url_to('register') ?>" method="post">
-                        <div class="card-body">
-                            <!--Input correo-->
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Dirección de correo</label>
-                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" inputmode="email" autocomplete="email" placeholder="Ingresa el correo" required />
-                            </div>
+                            <td>
+                            <a href="<?= route_to('admin_eliminar', $record['id']); ?>" class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este registro?')">
+                                <i class="fa-solid fa-trash-can-arrow-up" style="color: #d01b48;"></i>
+                            </a>
+                            </td>
+                           
+                        </tr>
 
-                            <!--Input usuario-->
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Usuario</label>
-                                <input type="text" " name="username" class="form-control" inputmode="text" autocomplete="username" id="exampleInputPassword1" placeholder="Ingresa el nombre de usuario" required />
-                            </div>
+                        
 
-                            <!--Input contraseña-->
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Contraseña</label>
-                                <input type="password" name="password" class="form-control" inputmode="text" autocomplete="new-password" id="exampleInputPassword1" placeholder="Ingresa una contraseña" required />
-                            </div>
+                        <!-- Modal de edición para cada registro -->
+                        <div class="modal fade" id="editarModal<?= $record['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editarModalLabel" style="font-weight: bold;">Editar Registro</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Formulario de edición con los campos -->
+                                        <form action="modificar" method="post">
+                                            <input type="hidden" name="id" value="<?= $record['id']; ?>">
+                                            
+                                            <!--Campo nombre-->
+                                            <div class="form-group">
+                                                <label for="name">Nombre</label>
+                                                <input type="text" class="form-control"  name="name" value="<?= $record['name']; ?>">
+                                            </div>
 
-                             <!--Input contraseña x2-->
-                             <div class="form-group">
-                                <label for="exampleInputPassword1">Confirmar contraseña</label>
-                                <input type="password" name="password_confirm" class="form-control" inputmode="text" autocomplete="new-password" id="exampleInputPassword1" placeholder="Ingresa nuevamente la contraseña" required />
-                            </div>
-                            <?php if (session('error') !== null) : ?>
-                    <div class="alert alert-danger" role="alert"><?= session('error') ?></div>
-                <?php elseif (session('errors') !== null) : ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php if (is_array(session('errors'))) : ?>
-                            <?php foreach (session('errors') as $error) : ?>
-                                <?= $error ?>
-                                <br>
-                            <?php endforeach ?>
-                        <?php else : ?>
-                            <?= session('errors') ?>
-                        <?php endif ?>
-                    </div>
-                <?php endif ?>
+                                            <!--Campo correo-->
+                                            <div class="form-group">
+                                                <label for="name">Correo</label>
+                                                <input type="email" class="form-control"  name="email" value="<?= $record['secret']; ?>">
+                                            </div>
 
+                                            <!--Campo correo-->
+                                            <div class="form-group">
+                                                <label for="name">Contraseña</label>
+                                                <input type="password" class="form-control"  name="password" value="<?= $record['secret2']; ?>">
+                                            </div>
 
-                            <div class="form-group ">
-                                <div class="">
-                                    <button type="submit" class="btn btn-primary">Subir cambios</button>
+                                            <!--Campo grupo-->
+                                            <div class="form-group">
+                                                <label for="name">Grupo</label>
+                                                    <div class="form-group">
+                                                        <select class="custom-select form-control-border" name="group" id="exampleSelectBorder">
+                                                            <option>admin</option>
+                                                            <option>dataManager</option>
+                                                        </select>
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-primary" >Guardar cambios</button>
+                                        </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                </div>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
-            </div>
-        </div>
+        </div>    
     </section>
 </div>
 <?=$this->endSection();?>

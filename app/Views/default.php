@@ -19,19 +19,24 @@
 
 </head>
 <body>
+        <!--Sección contenido de rutas-->
         <?= $this->renderSection('content')?>
 
-        <div class="hold-transition login-page">
-                <?= $this->renderSection('contentLogin')?>
-        </div>
-
+        <!--Sección inicio de sesión-->
+        <?= $this->renderSection('contentLogin')?>
+        
         <!-- Scripts JavaScript (cargados al final del cuerpo) -->
-        <script type="text/javascript" src="<?php echo base_url('assets/bootstrap/js/bootstrap.min.js')?>"></script>
         <script src="<?php echo base_url('assets/adminlt3/js/adminlte.js')?>"></script>
         <script src="https://kit.fontawesome.com/ad7d17c265.js" crossorigin="anonymous"></script>
 
+
+        <!-- Script bootstrap-->
+        <script type="text/javascript" src="<?php echo base_url('assets/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+
         <!-- Script para solicitudes (cargado después de los scripts JavaScript principales) -->
         <script src="<?php echo base_url('assets/request/ajax.js')?>"></script>
-        <script src="<?php echo base_url('assets/request/excel.js')?>"></script>
+        <script src="<?php echo base_url('assets/request/excel.js')?>"></script>    
+        <script src="<?php echo base_url('assets/request/data.js')?>"></script>    
+
 </body>
 </html>
