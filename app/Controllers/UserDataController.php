@@ -3,9 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\UserData;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class UserDataController extends BaseController
 {
+    protected $session;
+
+    public function __construct()
+    {
+        $this->session = service('session');
+    }
     public function showList() {
        
         $model = new UserData();
@@ -26,6 +33,7 @@ class UserDataController extends BaseController
         }
     }
 
+
     public function updateData()
     {
         $model = new UserData();
@@ -40,21 +48,25 @@ class UserDataController extends BaseController
             return redirect()->to(site_url('admin/crear'))->with('error', 'ID de registro no válido');
         }
 
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
         $data = [
+            'id' => $id,
             'name' => $name,
             'secret' => $email,
-            'secret2' => $password,
-            'group' => $group,
+            'secret2' => $hashedPassword,
+            'group' =>  $group,
 
             // Actualiza más campos aquí según tus necesidades
         ];
 
-        if ($model->update($id, $data)) {
-            return redirect()->to(site_url('admin/crear'))->with('success', 'Registro actualizado exitosamente');
+        if ($model->updateGroup($data)) {
+            $this->session->setFlashdata('success', 'Se actualizaron los datos correctamente');
         } else {
-            return redirect()->to(site_url('admin/crear'))->with('error', 'Error al actualizar el registro');
+            $this->session->setFlashdata('error','Error al actualizar la contraseña');
         }
- 
+        return redirect()->to(site_url('admin/editar'));
+
     }
 
     public function deleteUser($id)
@@ -64,13 +76,14 @@ class UserDataController extends BaseController
         // Verificar si el registro existe antes de eliminarlo
         $registro = $model->find($id);
 
-        if (!$registro) {
-            return 'Registro no encontrado';
+        if ($registro == null) {
+            throw PageNotFoundException::forPageNotFound();
         }
 
-        // Eliminar el registro
         $model->delete($id);
 
-        return redirect()->to(site_url('admin/crear'))->with('success', 'Registro eliminado exitosamente');
+        return redirect()->to('admin/crear')->with('message', 'Registro eliminado exitosamente');
+
     }
+
 }

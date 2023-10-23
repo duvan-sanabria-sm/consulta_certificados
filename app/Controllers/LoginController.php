@@ -8,6 +8,5 @@ class LoginController extends Controller{
         public function showViewLogin(): string
         {
             return view('auth/login');
-                   
         }
 }

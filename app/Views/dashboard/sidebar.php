@@ -19,15 +19,15 @@
         <li class="nav-header">Panel de Administración</li>
           
         <!--Lista de ingreso de certificados-->
-        <li class="nav-links active">
+        <!--<li class="nav-links active">
             <a href="<?= route_to('admin/ingreso');?>" class="nav-link">
               <i class="fa-solid fa-user-plus"></i>
               <p> Ingreso de certificados</p>
             </a>
-        </li>
+        </li>-->
     
         <!--Lista crud-->
-        <?php if ($user->inGroup('admin')) : ?>
+        <?php if ($user->inGroup('administrador')) : ?>
         <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
@@ -35,10 +35,16 @@
             </a>
 
             <ul class="nav nav-treeview">
-            <!--Crear-->
+            <!--Crear
             <li class="nav-item">
-                <a href="<?= route_to('admin/crear');?>" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i><p>Editar datos</p>
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i><p>Crear usuario</p>
+                </a>
+            </li>-->
+            <!--Editar-->
+            <li class="nav-item">
+                <a href="<?= route_to('admin/editar'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i><p>Editar usuarios</p>
                 </a>
             </li>  
           </ul>

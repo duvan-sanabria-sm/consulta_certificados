@@ -5,8 +5,12 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
+                <div class="col-sm-6"><h1>Editar Usuarios</h1></div>
                 <div class="col-sm-6">
-                    <h1>Editar Usuarios</h1>
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                        <li class="breadcrumb-item active">Editar Usuarios</li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -23,9 +27,9 @@
                       <th>Usuario</th>
                       <th>Correo</th>
                       <th>Contraseña</th>
-                      <th>Grupo</th>
+                      <th>Rol</th>
                       <th>Editar</th>
-                      <th>Eliminar</th>
+                      <!--<th>Eliminar</th>-->
                     </tr>
                   </thead>
                   <tbody>
@@ -42,15 +46,12 @@
                                 style="color: #0971b7;"></i>
                             </td>
 
-                            <td>
-                            <a href="<?= route_to('admin_eliminar', $record['id']); ?>" class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este registro?')">
+                            <!--<td>
+                            <a href="<?= route_to('admin_eliminar', $record['id']); ?>" class="btn" onclick="return confirm('¿Seguro que deseas eliminar este registro?')">
                                 <i class="fa-solid fa-trash-can-arrow-up" style="color: #d01b48;"></i>
                             </a>
-                            </td>
-                           
+                            </td>-->
                         </tr>
-
-                        
 
                         <!-- Modal de edición para cada registro -->
                         <div class="modal fade" id="editarModal<?= $record['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
@@ -82,16 +83,17 @@
                                             <!--Campo correo-->
                                             <div class="form-group">
                                                 <label for="name">Contraseña</label>
-                                                <input type="password" class="form-control"  name="password" value="<?= $record['secret2']; ?>">
+                                                <input type="password" class="form-control"  name="password" placeholder="Ingrese contraseña nueva">
                                             </div>
 
                                             <!--Campo grupo-->
                                             <div class="form-group">
-                                                <label for="name">Grupo</label>
+                                                <label for="name">Rol</label>
                                                     <div class="form-group">
                                                         <select class="custom-select form-control-border" name="group" id="exampleSelectBorder">
-                                                            <option>admin</option>
-                                                            <option>dataManager</option>
+                                                            <option value="">Seleccionar un rol</option>
+                                                            <option value="administrador">administrador</option>
+                                                            <option value="gestor">gestor</option>
                                                         </select>
                                                     </div>
                                             </div>
@@ -106,6 +108,15 @@
                         </div>
                     <?php endforeach; ?>
                     </tbody>
+                        <?php if (session()->getFlashdata('success')): ?>
+                            <div class="alert alert-success">
+                                <?= session()->getFlashdata('success') ?>
+                            </div>
+                        <?php elseif (session()->getFlashdata('error')): ?>
+                            <div class="alert alert-danger">
+                                <?= session()->getFlashdata('error') ?>
+                            </div>
+                        <?php endif; ?>
                 </table>
             </div>
         </div>    
