@@ -71,31 +71,30 @@
                                             <!--Campo nombre-->
                                             <div class="form-group">
                                                 <label for="name">Nombre</label>
-                                                <input type="text" class="form-control"  name="name" value="<?= $record['name']; ?>">
+                                                <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="<?= $record['name'];?>" required>
                                             </div>
 
                                             <!--Campo correo-->
                                             <div class="form-group">
                                                 <label for="name">Correo</label>
-                                                <input type="email" class="form-control"  name="email" value="<?= $record['secret']; ?>">
+                                                <input type="email" class="form-control" name="secret" placeholder="Ingrese su correo" value="<?= $record['secret']; ?>" required>
                                             </div>
 
                                             <!--Campo correo-->
                                             <div class="form-group">
                                                 <label for="name">Contraseña</label>
-                                                <input type="password" class="form-control"  name="password" placeholder="Ingrese contraseña nueva">
+                                                <input type="text" class="form-control" name="secret2" placeholder="Ingrese contraseña nueva" required>
                                             </div>
 
                                             <!--Campo grupo-->
                                             <div class="form-group">
                                                 <label for="name">Rol</label>
-                                                    <div class="form-group">
-                                                        <select class="custom-select form-control-border" name="group" id="exampleSelectBorder">
-                                                            <option value="">Seleccionar un rol</option>
-                                                            <option value="administrador">administrador</option>
-                                                            <option value="gestor">gestor</option>
-                                                        </select>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <select class="custom-select form-control-border" name="group" id="exampleSelectBorder" required>
+                                                        <option value="administrador" <?= ($record['grupo'] === 'administrador') ? 'selected' : ''; ?>>administrador</option>
+                                                        <option value="gestor" <?= ($record['grupo'] === 'gestor') ? 'selected' : ''; ?>>gestor</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -108,15 +107,13 @@
                         </div>
                     <?php endforeach; ?>
                     </tbody>
-                        <?php if (session()->getFlashdata('success')): ?>
-                            <div class="alert alert-success">
-                                <?= session()->getFlashdata('success') ?>
-                            </div>
-                        <?php elseif (session()->getFlashdata('error')): ?>
-                            <div class="alert alert-danger">
-                                <?= session()->getFlashdata('error') ?>
-                            </div>
-                        <?php endif; ?>
+                    <?php if (session()->has('success')): ?>
+                        <div class="alert alert-success"><?= session('success') ?></div>
+                    <?php endif; ?>
+
+                    <?php if (session()->has('error')): ?>
+                        <div class="alert alert-danger"><?= session('error') ?></div>
+                    <?php endif; ?>
                 </table>
             </div>
         </div>    

@@ -9,6 +9,13 @@ class UserData extends Model{
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'secret', 'secret2', 'grupo'];
 
+    //Obtener id del usuario
+    public function getDataById($id)
+    {
+        $data = $this->find($id);
+        return $data;
+    }
+
     public function getDataGroup()
     {
         return $this->db->table($this->table)
@@ -17,29 +24,11 @@ class UserData extends Model{
         ->get()->getResultArray();
     }
 
-    public function updateGroup($dataGroup)
-    
+
+    //Modificar datos
+    public function updateData($dataToUpdate)    
     { 
-        $db = $this->db->table('identidades_autenticacion');
-        $this->db->transStart();
-
-        // Actualiza las columnas en la tabla "identidades_autenticacion"
-        $db->where('id', $dataGroup['id'])
-            ->set('name', $dataGroup['name'])
-            ->set('secret', $dataGroup['secret'])
-            ->set('secret2', $dataGroup['secret2'])
-            ->update();
-
-
-        // Actualiza la columna "group" en la tabla "acceso_grupo_usuarios"
-        $db = $this->db->table('acceso_grupo_usuarios');
-        $db->where('user_id', $dataGroup['id'])
-            ->set('group', $dataGroup['group'])
-            ->update();
-        
-        $this->db->transComplete();   
-
-        return $this->db->transStatus(); // Devuelve true si la transacción se completa con éxito, o false en caso de error.
+        return $this->update($dataToUpdate['id'], $dataToUpdate);
 
     }   
 }

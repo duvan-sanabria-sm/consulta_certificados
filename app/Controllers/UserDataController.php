@@ -3,26 +3,32 @@
 namespace App\Controllers;
 
 use App\Models\UserData;
+use App\Models\UserGroup;
+
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class UserDataController extends BaseController
 {
     protected $session;
 
+    //Método constructor
     public function __construct()
     {
         $this->session = service('session');
     }
-    public function showList() {
+
+
+    //Método para mostrar a todos los usuarios
+    public function showList() 
+    {
        
         $model = new UserData();
 
         $data['records'] = $model->getDataGroup();
 
-      
         if (empty($data['records'])) {
-            // Si no se encontraron registros, puedes manejarlo aquí
             return "No se encontraron registros";
+
         } else {
             $user = auth()->user(); 
 
@@ -34,41 +40,34 @@ class UserDataController extends BaseController
     }
 
 
+    //Método para la gestión de datos del usuario
     public function updateData()
     {
-        $model = new UserData();
+        $userDataModel = new UserData();
 
-        $id = $this->request->getPost('id');
-        $name = $this->request->getPost('name');
-        $email = $this->request->getPost('email');
-        $password = $this->request->getPost('password');
-        $group = $this->request->getPost('group');
+        $postData = $this->request->getPost();
+        $password = $this->request->getPost('secret2');
+        $rol = $this->request->getPost('group');
 
-        if (!$id) {
-            return redirect()->to(site_url('admin/crear'))->with('error', 'ID de registro no válido');
-        }
 
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $password_encript = password_hash($password,PASSWORD_BCRYPT);
+        $postData['secret2'] = $password_encript; 
+    
+        $userGroup = new UserGroup();
 
-        $data = [
-            'id' => $id,
-            'name' => $name,
-            'secret' => $email,
-            'secret2' => $hashedPassword,
-            'group' =>  $group,
+        $userId = $userGroup->getGroupByUserId($postData['id']);
 
-            // Actualiza más campos aquí según tus necesidades
-        ];
-
-        if ($model->updateGroup($data)) {
+        if ($userDataModel->updateData($postData) && $userGroup->updateGroup($userId, $rol)) {
             $this->session->setFlashdata('success', 'Se actualizaron los datos correctamente');
-        } else {
-            $this->session->setFlashdata('error','Error al actualizar la contraseña');
-        }
-        return redirect()->to(site_url('admin/editar'));
 
+        } else {
+            $this->session->setFlashdata('error', 'No se encontró un grupo para el usuario');
+        }
+        
+        return redirect()->to(site_url('admin/editar'));
     }
 
+    //Método para la elimininación de usuarios
     public function deleteUser($id)
     {
         $model = new UserData();
@@ -85,5 +84,4 @@ class UserDataController extends BaseController
         return redirect()->to('admin/crear')->with('message', 'Registro eliminado exitosamente');
 
     }
-
 }
