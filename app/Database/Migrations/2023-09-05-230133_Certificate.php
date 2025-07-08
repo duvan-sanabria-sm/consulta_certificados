@@ -26,7 +26,7 @@ class Certificate extends Migration
             ],
 
             'fecha' => [
-                'type' => 'VARCHAR',	
+                'type' => 'DATE',	
             ],
 
         ]);

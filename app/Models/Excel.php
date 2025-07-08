@@ -46,16 +46,17 @@ class Excel extends Model{
             foreach($sheet->getRowIterator(2) as $row){
                 
                 $model = new \App\Models\Excel();
-                $no_certificates = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
-                //$no_certificates = $model->insertWidthUUID();
-                $name = trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex()));
-                $capacitation = trim($sheet->getCellByColumnAndRow(3,$row->getRowIndex()));
+
+                $no_certificates = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));;
+                $name            = trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex()));
+                $capacitation    = trim($sheet->getCellByColumnAndRow(3,$row->getRowIndex()));
+                $url             = trim($sheet->getCellByColumnAndRow(5,$row->getRowIndex()));
                 
-                if($no_certificates == '' || $name == '' || $capacitation == ''){
+                if($no_certificates == '' || $name == '' || $capacitation == '' || $url == '' ){
                     continue;
                 }
 
-                $data_certificates = ['no_certificado'=>$no_certificates, 'nombre'=>$name, 'capacitacion'=> $capacitation];
+                $data_certificates = ['no_certificado'=>$no_certificates, 'nombre'=>$name, 'capacitacion'=> $capacitation, 'link_certificado' => $url];
                 $arr_data_certificates[] = $data_certificates;
                 $number_certificates++;
             }

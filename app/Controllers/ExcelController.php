@@ -2,12 +2,21 @@
         namespace App\Controllers;
         use App\Models\Excel;
         use CodeIgniter\Controller;
+
+        /**
+         * Controlador para manejar la importación de datos desde el archivo Excel
+         */
         class ExcelController extends Controller{
                 
                 public function __construct() {
-                        helper(['form','url']);
-                }
 
+                        //Carga helpers necesarios para el manejo de formularios y URLs
+                        helper(['form','url']); 
+                }
+                
+                /**
+                 * Importa datos desde un archivo Excel cargado vía formilario POST.
+                 */
                 public function import(){
 
                         if($this->request->getMethod()== 'post'){
@@ -16,6 +25,7 @@
                                 
                                
                                 if($file->isValid()){
+
                                         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
 
                                         try {
@@ -24,15 +34,19 @@
                                                         $sheet = $spreadsheet->getSheet(0);
 
                                                         $excelModel = new Excel();
+
+                                                        /**
+                                                         * Hace llamado al modelo de la clase Excel
+                                                         */
                                                         $resultData = $excelModel->importDataExcel($sheet);
+
 
                                                         if($resultData){
                                                                 return "¡Felicidades! Los registros se han importado correctamente en la base de datos.";    
                                                         }else{
                                                                 return "Lo siento, no fue posible insertar los registros en la base de datos.";
                                                         }
-                        
-                                                        
+     
                                                 }
                                                 else{
                                                         return "Solo se aceptan archivos de xlsx";
@@ -48,6 +62,9 @@
                                         //return redirect()->route('home');
                                 }
                         }else{
+                                /**
+                                 * Si no es POST, redirige a la vista principal
+                                 */
                                 $error ="bien";
                                 $data = ["error" => $error];
                                 return view('roles/admin/main',$data);
