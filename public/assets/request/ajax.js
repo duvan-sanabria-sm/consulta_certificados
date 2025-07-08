@@ -15,7 +15,31 @@ class Certificate {
                         data: object_id,
                 
                         success: function(data) {
+                                  if (data == null) {
+                                        $('#main-table').hide();
+                                        $('#errorText').text("No se encontraron registros.");
+                                } else {
+                                        $('#errorText').text('');
+                                        $('#tablaDatos').empty();
+                                        $('#main-table').show();
 
+                                        var row = document.createElement("tr");
+
+                                        row.innerHTML += `<td>${data.no_certificado}</td>`;
+                                        row.innerHTML += `<td>${data.nombre}</td>`;
+                                        row.innerHTML += `<td>${data.capacitacion}</td>`;
+                                        row.innerHTML += `<td>${data.fecha}</td>`;
+                                        row.innerHTML += `<td>
+                                        <a href="${data.link_certificado}" target="_blank" class="btn btn-primary">
+                                                Descargar certificado
+                                        </a>
+                                        </td>`;
+
+                                        document.getElementById("tablaDatos").appendChild(row);
+
+                               
+                                }
+                                /*
                                 if(data == null){
                                         $('#main-table').hide();
                                         const error = "No se encontro registros"
@@ -34,8 +58,8 @@ class Certificate {
                                                 cell.textContent = data[key];
                                                 row.appendChild(cell);
                                         }
-                                        tableData.appendChild(row);      
-                                }
+                                        tableData.appendChild(row); 
+                                }*/
                         },
                         error: function(xhr, status, error) {
                                 // Manejar los errores aquí
@@ -47,6 +71,7 @@ class Certificate {
         GetId(){
 
                 $('#send').on('click', function() {
+
                         var id = $('#identifier').val();
                         var object_id = {
                             identificador: id

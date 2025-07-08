@@ -48,7 +48,7 @@ class Excel {
     insert() {
 
         $.ajax({
-            url: 'importar',
+            url: 'certificados',
             type: 'post',
             data: this.form,
             processData: false,
