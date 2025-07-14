@@ -17,7 +17,7 @@ $routes->get('/', 'User::index');
 $routes->get('log-in', 'LoginController::showViewLogin');
 
 // Procesar logout (solo POST por seguridad)
-$routes->post('log-out', 'AdminController::logout');
+$routes->post('log-out', 'AdminController::logout', ['as' => 'logout']);
 
 // Consulta pública de certificados
 $routes->get('consulta', 'RequestController::manageCertificateQuery');
@@ -32,16 +32,19 @@ $routes->get('consulta', 'RequestController::manageCertificateQuery');
 
 $routes->group('admin', function ($routes) {
     // Mostrar lista de usuarios
-    $routes->get('usuarios', 'UserDataController::showList', ['as' => 'usuarios']);
+    $routes->get('usuarios', 'UserDataController::showList', ['as' => 'users']);
 
     // Vista de inicio del panel de administrador
-    $routes->get('inicio', 'AdminController::showViewHome', ['as' => 'inicio']);
+    $routes->get('inicio', 'AdminController::showViewHome', ['as' => 'home']);
 
-    // Importación de certificados desde archivo
+    // Vista importación de certificados desde archivo
     $routes->post('certificados', 'ExcelController::import', ['as' => 'certificados']);
 
     // Actualizar datos de usuario
     $routes->post('actualizar-usuario', 'UserDataController::updateData', ['as' => 'actualizar-usuario']);
+
+    //Descargar certificados
+    $routes->post('descargar', 'ExcelController::downoload_report', ['as' => 'descargar-reporte']);
 });
 
 
@@ -52,7 +55,7 @@ $routes->group('admin', function ($routes) {
 
 // Excluir solo las rutas que vamos a personalizar nosotros (GET /login, GET /register)
 service('auth')->routes($routes, [
-    'except' => ['login']
+    'except' => ['login','logout','register']
 ]);
 
 // Registrar solo la acción de login (POST /login)

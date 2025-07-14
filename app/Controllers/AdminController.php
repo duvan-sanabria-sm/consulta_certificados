@@ -22,7 +22,7 @@ class AdminController extends Controller{
                     return view('welcome_message');
                 }
             }
-            return "no carga";
+           
         }
 
         function  showViewCreate(): string 
@@ -57,6 +57,6 @@ class AdminController extends Controller{
             auth()->logout();
             
             // Redirige a la página de inicio de sesión u otra página después del cierre de sesión
-            return redirect()->to('log');
+            return redirect()->to('log-in');
         }
 }

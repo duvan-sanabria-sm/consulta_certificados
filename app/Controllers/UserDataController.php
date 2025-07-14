@@ -67,7 +67,7 @@ class UserDataController extends BaseController
         return redirect()->to(site_url('admin/editar'));
     }
 
-    //Método para la elimininación de usuarios
+    //Método para la eliminación de usuarios
     public function deleteUser($id)
     {
         $model = new UserData();

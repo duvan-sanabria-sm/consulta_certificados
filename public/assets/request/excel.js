@@ -54,10 +54,12 @@ class Excel {
             processData: false,
             contentType: false,
             success: function(response){
-              $('#successText').text(response);
+              $('#successText').text(response.message);
             },
-            error: function(error) {
-                console.error('Error en la solicitud:', error);
+            error: function(xhr) {
+                const response = xhr.responseJSON;
+                console.error('Error en la solicitud:', response?.message);
+                $('#errorText').text(response?.message|| 'Ocurrió un error inesperado');
               }
         });
     }
