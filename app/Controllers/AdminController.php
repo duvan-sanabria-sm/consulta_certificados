@@ -13,10 +13,7 @@ class AdminController extends Controller{
                     
                 if (auth()->loggedIn()) {
                         
-                    return view('dashboard/header'). 
-                            view('dashboard/sidebar',['user' => $user]).
-                            view('roles/admin/home').
-                            view('dashboard/footer');
+                        return view('roles/admin/home', ['user' => $user]);
                 }else {
                     
                     return view('welcome_message');

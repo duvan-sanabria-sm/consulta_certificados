@@ -51,7 +51,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="<?= route_to('descargar-reporte');?>" class="nav-link">
+            <a href="<?= route_to('');?>" class="nav-link">
               <i class="fa-regular fa-circle-down nav-icon"></i><p>Descargar informe</p>
             </a>
           </li>

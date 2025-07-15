@@ -4,7 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Certificados</title>
-       
+    
+</style>
         <!-- Estilos principales (cargados primero) -->
         <link rel="stylesheet" href="<?php echo base_url('assets/styles.css')?>">
         
@@ -19,24 +20,35 @@
 
 </head>
 <body>
-        <!--Sección contenido de rutas-->
-        <?= $this->renderSection('content')?>
+    <?php if (!empty($user)): ?>    
+        <?= view('dashboard/header')?>
+    <?php endif; ?>
 
-        <!--Sección inicio de sesión-->
-        <?= $this->renderSection('contentLogin')?>
+    <?php if (!empty($user)): ?>
+        <?= view('dashboard/sidebar', ['user' => $user]) ?>
+    <?php endif; ?>
+
+    <!--Sección contenido de rutas-->
+    <?= $this->renderSection('content')?>
+
+    <!--Sección inicio de sesión-->
+    <?= $this->renderSection('contentLogin')?>
+
+    <?php if (!empty($user)): ?>
+        <?= view('dashboard/footer') ?>
+    <?php endif; ?>
         
-        <!-- Scripts JavaScript (cargados al final del cuerpo) -->
-        <script src="<?php echo base_url('assets/adminlt3/js/adminlte.js')?>"></script>
-        <script src="https://kit.fontawesome.com/ad7d17c265.js" crossorigin="anonymous"></script>
+    <!-- Scripts JavaScript (cargados al final del cuerpo) -->
+    <script src="<?php echo base_url('assets/adminlt3/js/adminlte.js')?>"></script>
+    <script src="https://kit.fontawesome.com/ad7d17c265.js" crossorigin="anonymous"></script>
 
+    <!-- Script bootstrap-->
+    <script type="text/javascript" src="<?php echo base_url('assets/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
 
-        <!-- Script bootstrap-->
-        <script type="text/javascript" src="<?php echo base_url('assets/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
-
-        <!-- Script para solicitudes (cargado después de los scripts JavaScript principales) -->
-        <script src="<?php echo base_url('assets/request/ajax.js')?>"></script>
-        <script src="<?php echo base_url('assets/request/excel.js')?>"></script>    
-        <script src="<?php echo base_url('assets/request/data.js')?>"></script>    
-
+    <!-- Script para solicitudes (cargado después de los scripts JavaScript principales) -->
+    <script src="<?php echo base_url('assets/request/ajax.js')?>"></script>
+    <script src="<?php echo base_url('assets/request/excel.js')?>"></script>    
+    <script src="<?php echo base_url('assets/request/data.js')?>"></script>    
+    
 </body>
 </html>

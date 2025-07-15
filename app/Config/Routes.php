@@ -44,7 +44,7 @@ $routes->group('admin', function ($routes) {
     $routes->post('actualizar-usuario', 'UserDataController::updateData', ['as' => 'actualizar-usuario']);
 
     //Descargar certificados
-    $routes->post('descargar', 'ExcelController::downoload_report', ['as' => 'descargar-reporte']);
+    $routes->post('descargar', 'ExcelController::downoload_report', ['as' => 'informe']);
 });
 
 

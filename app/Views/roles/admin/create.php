@@ -6,6 +6,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6"><h1>Editar Usuarios</h1></div>
+                <?php if (!empty($message)): ?>
+                    <div class="alert alert-warning">
+                        <?= esc($message) ?>
+                    </div>
+                <?php endif; ?>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Inicio</a></li>

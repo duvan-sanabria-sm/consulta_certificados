@@ -21,22 +21,17 @@ class UserDataController extends BaseController
     //Método para mostrar a todos los usuarios
     public function showList() 
     {
-       
         $model = new UserData();
+        $records = $model->getDataGroup();
+        $user = auth()->user(); 
 
-        $data['records'] = $model->getDataGroup();
+        $message = empty($records)? 'No se encontraron registros': null;
 
-        if (empty($data['records'])) {
-            return "No se encontraron registros";
-
-        } else {
-            $user = auth()->user(); 
-
-            return view('dashboard/header').
-            view('dashboard/sidebar', ['user' => $user]).
-            view('roles/admin/create', $data).
-            view('dashboard/footer');
-        }
+          return view('roles/admin/create', [
+            'user' => $user, 
+            'records' => $records,
+            'message' => $message
+            ]);
     }
 
 
