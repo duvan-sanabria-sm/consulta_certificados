@@ -17,7 +17,7 @@ $routes->get('/', 'User::index');
 $routes->get('log-in', 'LoginController::showViewLogin');
 
 // Procesar logout (solo POST por seguridad)
-$routes->post('log-out', 'AdminController::logout', ['as' => 'logout']);
+//$routes->post('log-out', 'AdminController::logout', ['as' => 'logout']);
 
 // Consulta pública de certificados
 $routes->get('consulta', 'RequestController::manageCertificateQuery');
@@ -55,13 +55,11 @@ $routes->group('admin', function ($routes) {
 
 // Excluir solo las rutas que vamos a personalizar nosotros (GET /login, GET /register)
 service('auth')->routes($routes, [
-    'except' => ['login','logout','register']
+    'except' => ['login','register']
 ]);
 
 // Registrar solo la acción de login (POST /login)
 $routes->post('login', '\CodeIgniter\Shield\Controllers\LoginController::loginAction');
-
-
 
 // ============================
 // PERSONALIZACIÓN DE ERRORES
