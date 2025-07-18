@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <!-- Formulario de edición con los campos -->
-                                        <form action="modificar" method="post">
+                                        <form action="actualizar" method="post">
                                             <input type="hidden" name="id" value="<?= $record['id']; ?>">
                                             
                                             <!--Campo nombre-->

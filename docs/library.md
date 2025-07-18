@@ -1,3 +1,5 @@
+➡️ [Volver a la documentación principal](../README.md)
+
 # Librerías Usadas en el Proyecto
 
 Este documento describe las principales librerías y recursos externos utilizados en el proyecto web basado en PHP (probablemente con CodeIgniter u otro framework similar).

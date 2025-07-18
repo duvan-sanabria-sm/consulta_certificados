@@ -15,6 +15,7 @@ $routes->get('/', 'User::index');
 
 // Vista del formulario de login personalizado
 $routes->get('log-in', 'LoginController::showViewLogin');
+$routes->get('login', 'LoginController::showViewLogin');
 
 // Procesar logout (solo POST por seguridad)
 //$routes->post('log-out', 'AdminController::logout', ['as' => 'logout']);
@@ -41,7 +42,7 @@ $routes->group('admin', function ($routes) {
     $routes->post('certificados', 'ExcelController::import', ['as' => 'certificados']);
 
     // Actualizar datos de usuario
-    $routes->post('actualizar-usuario', 'UserDataController::updateData', ['as' => 'actualizar-usuario']);
+    $routes->post('actualizar', 'UserDataController::updateData', ['as' => 'actualizar']);
 
     //Descargar certificados
     $routes->post('descargar', 'ExcelController::downoload_report', ['as' => 'informe']);
@@ -66,4 +67,4 @@ $routes->post('login', '\CodeIgniter\Shield\Controllers\LoginController::loginAc
 // ============================
 
 // Ruta personalizada para página 404
-$routes->set404Override('ErrorController::miError404');
+$routes->set404Override('ErrorController::show404');

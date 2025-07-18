@@ -12,7 +12,7 @@
             <div class="card-body login-card-body">
                 <h4 class="text-center text-lg">Certificado de Capacitación</h4>
                 <p class="login-box-msg">Ingrese a su cuenta</p>
-                <form action="<?= url_to('login') ?>" method="post">
+                <form action="<?= url_to('login') ?>" method="post" autocomplete="on">
 
                     <!--Input Group usuario-->
                     <div class="input-group mb-3">
@@ -47,7 +47,8 @@
                           <?php endif ?>
                       </div>
                     <?php endif ?>
-
+                    
+                      
                     <!--Input envió formulario-->
                     <div class="row">
                         <div class="col-12">

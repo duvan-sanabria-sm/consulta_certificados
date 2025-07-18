@@ -12,7 +12,7 @@
             console.log(formData);
 
             $.ajax({
-                url: 'modificar',
+                url: 'actualizar',
                 type: 'POST',
                 data: formData,
                 success: function (response) {
