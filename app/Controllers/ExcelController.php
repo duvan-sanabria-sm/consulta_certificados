@@ -1,8 +1,13 @@
 <?php 
         namespace App\Controllers;
+
         use App\Models\Excel;
         use CodeIgniter\Controller;
         use PhpOffice\PhpSpreadsheet\IOFactory;
+        use PhpOffice\PhpSpreadsheet\Spreadsheet;
+        use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+        use PhpOffice\PhpSpreadsheet\Style\Alignment;
+        use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
         use PhpOffice\PhpSpreadsheet\Reader\Exception as ReaderException;
 
         /* Controlador para manejar la importación de datos desde el archivo Excel*/
@@ -78,15 +83,48 @@
                 public function  downoload_report()
                 {
                         $get_certificate = new Excel();
+                        $data = $get_certificate->findAllCertificates();
 
-                        $data = $get_certificate->findAll();
+                        $spreadsheet = new Spreadsheet();
+                        $sheet = $spreadsheet->getActiveSheet();
+                        $sheet->setTitle('Certificados');
 
-                        return 'hola';
+                        $sheet->setCellValue('A1', 'no_certificado');
+                        $sheet->setCellValue('B1', 'nombre');
+                        $sheet->setCellValue('C1', 'capacitacion');
+                        $sheet->setCellValue('D1', 'fecha');
+                        $sheet->setCellValue('E1', 'link_certificado');
 
-                        var_dump("datos: ". $data);
+                        $fila = 2;
 
+                        foreach ($data as $filaDatos) {
+                        $sheet->setCellValue("A$fila", $filaDatos['no_certificado']);
+                        $sheet->setCellValue("B$fila", $filaDatos['nombre']);
+                        $sheet->setCellValue("C$fila", $filaDatos['capacitacion']);
+                        $sheet->setCellValue("D$fila", $filaDatos['fecha']);
+                        $sheet->setCellValue("E$fila", $filaDatos['link_certificado']);
 
+                        
+                        $fila++;
+                        }
+                                                
+                        $writer = new Xlsx($spreadsheet);
+                        
+                        if (ob_get_length()) {
+                                ob_end_clean();
+                        }
 
+                        // Configurar headers
+                        $filename = 'certificados_' . date('Y-m-d') . '.xlsx';
+                        
+                        // Guardar el archivo en memoria y devolverlo como respuesta
+                        $temp_file = tempnam(sys_get_temp_dir(), 'excel_');
+                        $writer->save($temp_file);
 
+                        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                        header('Content-Disposition: attachment; filename="' . $filename . '"');
+                        header('Content-Length: ' . filesize($temp_file));
+                        readfile($temp_file);
+                        exit;
                 }
         }       

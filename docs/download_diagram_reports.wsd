@@ -1,0 +1,17 @@
+@startuml
+actor Usuario
+participant "Vista (AJAX)" as Vista
+participant "Controlador CI" as Controlador
+participant "Modelo CI" as Modelo
+participant "Base de Datos" as BD
+
+Usuario -> Vista : Click en "Descargar"
+Vista -> Controlador : POST descargar_informe
+Controlador -> Modelo : Obtener_datos
+Modelo -> BD : SELECT * FROM certificados
+BD --> Modelo : Datos encontrados
+Modelo --> Controlador : Lista de datos
+Controlador -> Controlador : Generar archivo (CSV/Excel)
+Controlador --> Vista : Respuesta Blob (archivo)
+Vista -> Usuario : Dispara descarga con link
+@enduml

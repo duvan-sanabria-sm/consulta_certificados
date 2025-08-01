@@ -1,18 +1,17 @@
 <?php 
+
 namespace App\Models;
 
 use CodeIgniter\Model;
 use Ramsey\Uuid\Uuid;
 
-class Excel extends Model{
+class Excel extends Model {
 
-    //Propiedades
     protected $table = 'certificados';
     protected $db;
     protected $primaryKey = 'no_certificado';
 
 
-    //Constructor de Inicialización
     public function __construct(){
 
         parent::__construct();
@@ -29,7 +28,6 @@ class Excel extends Model{
 
     
     //Método para insertar datos desde el excel
- 
     function importDataExcel($sheet) {
     
         $db = \Config\Database::connect();
@@ -85,6 +83,12 @@ class Excel extends Model{
             return "No se inserto ningún registro.";
         }
         return "Se insertaron $number_certificates registros correctamente";
+    }
+
+    public function findAllCertificates(){
+        
+        return $this->query('SELECT*FROM certificados')->getResultArray();
+        
     }
 }
 

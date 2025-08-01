@@ -17,11 +17,9 @@ $routes->get('/', 'User::index');
 $routes->get('log-in', 'LoginController::showViewLogin');
 $routes->get('login', 'LoginController::showViewLogin');
 
-// Procesar logout (solo POST por seguridad)
-//$routes->post('log-out', 'AdminController::logout', ['as' => 'logout']);
 
 // Consulta pública de certificados
-$routes->get('consulta', 'RequestController::manageCertificateQuery');
+$routes->get('consulta', 'RequestController::manageCertificateQuery', ['as'=> 'consult']);
 
 //Registrar cuentas
 //$routes->get('registro','RegisterController::registerUser');
@@ -39,13 +37,13 @@ $routes->group('admin', function ($routes) {
     $routes->get('inicio', 'AdminController::showViewHome', ['as' => 'home']);
 
     // Vista importación de certificados desde archivo
-    $routes->post('certificados', 'ExcelController::import', ['as' => 'certificados']);
+    $routes->post('certificados', 'ExcelController::import', ['as' => 'certificates']);
 
     // Actualizar datos de usuario
     $routes->post('actualizar', 'UserDataController::updateData', ['as' => 'actualizar']);
 
     //Descargar certificados
-    $routes->post('descargar', 'ExcelController::downoload_report', ['as' => 'informe']);
+    $routes->post('descarga', 'ExcelController::downoload_report', ['as' => 'informe']);
 });
 
 
