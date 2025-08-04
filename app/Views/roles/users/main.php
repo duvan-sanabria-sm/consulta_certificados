@@ -1,54 +1,45 @@
+<?= $this->extend('default') ?>
 
-<?= $this->extend('default')?>
+<?= $this->section('content') ?>
 
-<?=$this->section('content')?>
-<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-                <div class="container py-5">
-                <h1 class="display-3 text-white animated slideInRight">Consultas de Capacitación</h1>
-                <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb animated slideInRight mb-0">
-                        <li class="breadcrumb-item"><a href="<?= base_url('/');?>">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Consultas de Capacitación</li>
-                        </ol>
-                </nav>
+<!-- Banner principal con fondo -->
+<div class="header py-4 mb-5 text-white text-center wow fadeIn" data-wow-delay="0.1s">
+   
+</div>
+<p id="logo" class="brand image text-center">
+    <a class="auto-size" href="<?= base_url() ?>">
+        <img src="<?= base_url('assets/img/icon_sm.png') ?>" alt="Logo Servimeters" style="width: 150px; height: 150px; object-fit: contain;">
+        <span style="position:absolute; top:-999em;">Consultas Servimeters</span>
+    </a>
+</p>
+
+<!-- Tarjetas de consulta por país -->
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <!-- Colombia -->
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow h-100 text-center">
+                <div class="card-body">
+                    <img src="<?= base_url('assets/img/sig_icono.png') ?>" alt="Colombia" style="width: 150px; "class="mb-3 d-block mx-auto">
+                    <h2 class="text-center fw-bold">Consulta Colombia</h2>
+                    <p class="card-text">Consulta certificados emitidos en territorio colombiano.</p>
+                    <a href="<?= base_url('consultas_colombia') ?>" class="btn btn-outline-primary">Ir a la consulta</a>
                 </div>
-        </div> 
-
-<div class="container">
-        <div class="row">
-                <div class="col-md">
-                        <div class="card-body">
-                                <h5>Bienvenido a la consulta de Capacitación de SERVIMETERS</h5>
-                                <p class="card-description">Por favor indique su número de certificado</p>
-                                <form class="form-inline">
-                                        <input type="text" class="form-control mr-sm-2" id="identifier" placeholder="Ingresa número certificado">
-                                        <i class="fa-solid fa-magnifying-glass" id="send"></i>
-                                </form>
-                                <div id="errorText" style="color: red;"></div>
-                        </div>
-                </div>
+            </div>
         </div>
+
+        <!-- Panamá -->
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow h-100 text-center">
+                <div class="card-body">
+                    <img src="<?= base_url('assets/img/icon_panama.png') ?>" alt="Panamá" style="width: 150px;" class="mb-3 d-block mx-auto">
+                    <h2 class="text-center fw-bold">Consultas Panamá</h2>
+                    <p class="card-text">Consulta certificados emitidos en territorio panameño.</p>
+                    <a href="<?= base_url('consultas_panama') ?>" class="btn btn-outline-primary">Ir a la consulta</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="container">
-        <div id="main-table" style="display: none;">
-                
-                <table class="table">
-                        <thead>
-                                <tr>
-                                        <th>Certificado</th>
-                                        <th>Nombre</th>
-                                        <th>Capacitación</th>
-                                        <th>Fecha</th>
-                                </tr>
-                        </thead>
-                        <tbody id="tablaDatos">    
-                                <!-- Aquí se agregarán las filas de datos -->
-
-                        </tbody> 
-                </table>
-                
-        </div>
-</div>
-
-<?=$this->endSection('content');?>
+<?= $this->endSection('content') ?>

@@ -90,3 +90,8 @@ label{
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
     color: var(--bs-card-color);
 }
+
+.header{
+    background: url(http://localhost:8080/assets/img/noise.png) repeat 0 0 #0096D2;
+}
+

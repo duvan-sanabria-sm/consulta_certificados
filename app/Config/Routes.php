@@ -20,6 +20,9 @@ $routes->get('login', 'LoginController::showViewLogin');
 
 // Consulta pública de certificados
 $routes->get('consulta', 'RequestController::manageCertificateQuery', ['as'=> 'consult']);
+$routes->get('consultas_panama', 'User::showPanamaQuery', ['as' => 'consult_panama']);
+$routes->get('consultas_colombia', 'User::showColombiaQuery', ['as' => 'consult_colombia']);
+
 
 //Registrar cuentas
 //$routes->get('registro','RegisterController::registerUser');
