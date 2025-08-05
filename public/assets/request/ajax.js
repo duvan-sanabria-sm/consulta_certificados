@@ -7,13 +7,12 @@ class Certificate {
         }
 
         certificatesQuery(object_id){
-                
+
                 $.ajax({
-                        url: 'consulta',
-                        method:'get',
+                        url: '/certificates_query',
+                        method:'post',
                         dataType: 'json', 
                         data: object_id,
-                
                         success: function(data) {
                                   if (data == null) {
                                         $('#main-table').hide();
@@ -36,34 +35,15 @@ class Certificate {
                                         </td>`;
 
                                         document.getElementById("tablaDatos").appendChild(row);
-
-                               
                                 }
-                                /*
-                                if(data == null){
-                                        $('#main-table').hide();
-                                        const error = "No se encontro registros"
-                                        $('#errorText').text(error);  
-                                }else{
-                                        
-                                       $('#errorText').text('');
-                                       $('#tablaDatos').empty();
-                                       $('#main-table').show();
-                
-                                        // Recorrer los datos y agregar filas a la tabla
-                                        var tableData = document.getElementById("tablaDatos");
-                                        var row = document.createElement("tr");
-                                        for (var key in data) {
-                                                var cell = document.createElement("td");
-                                                cell.textContent = data[key];
-                                                row.appendChild(cell);
-                                        }
-                                        tableData.appendChild(row); 
-                                }*/
                         },
                         error: function(xhr, status, error) {
-                                // Manejar los errores aquí
-                                console.error(error,"mal");
+                                console.error(`Error AJAX:
+                                Status: ${status} | 
+                                Código de estado HTTP: ${xhr.status} | 
+                                Texto estado: ${xhr.statusText} | 
+                                Mensaje de error: ${error} | 
+                                Respuesta completa: ${xhr.responseText}`);
                         }
                 });     
         }
@@ -73,9 +53,15 @@ class Certificate {
                 $('#send').on('click', function() {
 
                         var id = $('#identifier').val();
+                        const path_parts = window.location.pathname.split('/');
+                        const country = path_parts[path_parts.length-1];
+
                         var object_id = {
-                            identificador: id
+                            identificador: id,
+                            country: country
                         };
+
+                        console.log("Datos del objeto:", object_id);
                         this.certificatesQuery(object_id); 
                 }.bind(this));
                 

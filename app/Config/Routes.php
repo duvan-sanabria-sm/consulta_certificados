@@ -16,13 +16,9 @@ $routes->get('/', 'User::index');
 // Vista del formulario de login personalizado
 $routes->get('log-in', 'LoginController::showViewLogin');
 $routes->get('login', 'LoginController::showViewLogin');
+$routes->get('consulta/(:alpha)','User::ShowCountryQuery/$1', ['as' => 'consult_country']);
 
-
-// Consulta pública de certificados
-$routes->get('consulta', 'RequestController::manageCertificateQuery', ['as'=> 'consult']);
-$routes->get('consultas_panama', 'User::showPanamaQuery', ['as' => 'consult_panama']);
-$routes->get('consultas_colombia', 'User::showColombiaQuery', ['as' => 'consult_colombia']);
-
+$routes->post('certificates_query','User::manageCertificateQuery',['as' => 'cert_query']);
 
 //Registrar cuentas
 //$routes->get('registro','RegisterController::registerUser');
@@ -68,4 +64,4 @@ $routes->post('login', '\CodeIgniter\Shield\Controllers\LoginController::loginAc
 // ============================
 
 // Ruta personalizada para página 404
-$routes->set404Override('ErrorController::show404');
+//$routes->set404Override('ErrorController::show404');

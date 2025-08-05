@@ -5,10 +5,13 @@ use CodeIgniter\Model;
 
 class Certificate extends Model{
     protected $table      = 'certificados';
-    // Uncomment below if you want add primary key
-     protected $primaryKey = 'no_certificado';
+    protected $primaryKey = 'no_certificado';
 
-   function certificaredConsultations($id){
-        return $this->find($id);
+   function certificaredConsultations($id, $country){
+
+        $builder = $this->builder();
+        
+        $result = $builder->where('no_certificado', $id)->where('pais', $country)->get()->getRow();
+        return $result;
     }
 }

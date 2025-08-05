@@ -23,7 +23,7 @@
                     <img src="<?= base_url('assets/img/sig_icono.png') ?>" alt="Colombia" style="width: 150px; "class="mb-3 d-block mx-auto">
                     <h2 class="text-center fw-bold">Consulta Colombia</h2>
                     <p class="card-text">Consulta certificados emitidos en territorio colombiano.</p>
-                    <a href="<?= base_url('consultas_colombia') ?>" class="btn btn-outline-primary">Ir a la consulta</a>
+                    <a href="<?= route_to('consult_country', 'colombia') ?>" class="btn btn-outline-primary">Ir a la consulta</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                     <img src="<?= base_url('assets/img/icon_panama.png') ?>" alt="Panamá" style="width: 150px;" class="mb-3 d-block mx-auto">
                     <h2 class="text-center fw-bold">Consultas Panamá</h2>
                     <p class="card-text">Consulta certificados emitidos en territorio panameño.</p>
-                    <a href="<?= base_url('consultas_panama') ?>" class="btn btn-outline-primary">Ir a la consulta</a>
+                    <a href="<?= route_to('consult_country', 'panama') ?>" class="btn btn-outline-primary">Ir a la consulta</a>
                 </div>
             </div>
         </div>
