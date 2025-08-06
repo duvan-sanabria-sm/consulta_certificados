@@ -31,7 +31,6 @@
                       <th>ID</th>
                       <th>Usuario</th>
                       <th>Correo</th>
-                      <th>Contraseña</th>
                       <th>Rol</th>
                       <th>Editar</th>
                       <!--<th>Eliminar</th>-->
@@ -40,26 +39,25 @@
                   <tbody>
                     <?php foreach ($records as $record): ?>
                         <tr>
-                            <td><?= $record['id']; ?></td>
-                            <td><?= $record['name']; ?></td>
+                            <td><?= $record['user_id']; ?></td>
+                            <td><?= $record['username']; ?></td>
                             <td><?= $record['secret']; ?></td>
-                            <td><?= $record['secret2']; ?></td>
                             <td><?= $record['grupo']; ?></td>
                             <td>
                                 <i class="fa-solid fa-pen-to-square" class="btn btn-primary"
-                                data-toggle="modal" data-target="#editarModal<?= $record['id']; ?>"
+                                data-toggle="modal" data-target="#editarModal<?= $record['user_id']; ?>"
                                 style="color: #0971b7;"></i>
                             </td>
 
                             <!--<td>
-                            <a href="<?= route_to('admin_eliminar', $record['id']); ?>" class="btn" onclick="return confirm('¿Seguro que deseas eliminar este registro?')">
+                            <a href="<?= route_to('admin_eliminar', $record['user_id']); ?>" class="btn" onclick="return confirm('¿Seguro que deseas eliminar este registro?')">
                                 <i class="fa-solid fa-trash-can-arrow-up" style="color: #d01b48;"></i>
                             </a>
                             </td>-->
                         </tr>
 
                         <!-- Modal de edición para cada registro -->
-                        <div class="modal fade" id="editarModal<?= $record['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="editarModal<?= $record['user_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -71,12 +69,12 @@
                                     <div class="modal-body">
                                         <!-- Formulario de edición con los campos -->
                                         <form action="actualizar" method="post">
-                                            <input type="hidden" name="id" value="<?= $record['id']; ?>">
+                                            <input type="hidden" name="id" value="<?= $record['user_id']; ?>">
                                             
                                             <!--Campo nombre-->
                                             <div class="form-group">
                                                 <label for="name">Nombre</label>
-                                                <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="<?= $record['name'];?>" required>
+                                                <input type="text" class="form-control" name="name" placeholder="Ingrese su nombre" value="<?= $record['username'];?>" required>
                                             </div>
 
                                             <!--Campo correo-->

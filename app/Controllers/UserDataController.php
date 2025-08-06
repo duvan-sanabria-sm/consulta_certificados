@@ -29,7 +29,8 @@ class UserDataController extends BaseController
         if(auth()->loggedIn()){
             return view('roles/admin/create', [
             'user' => $user, 
-            'records' => $records
+            'records' => $records,
+            'message' => $message
             ]);
 
         }else {
