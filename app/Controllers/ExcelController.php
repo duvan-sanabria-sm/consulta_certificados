@@ -94,6 +94,8 @@
                         $sheet->setCellValue('C1', 'capacitacion');
                         $sheet->setCellValue('D1', 'fecha');
                         $sheet->setCellValue('E1', 'link_certificado');
+                        $sheet->setCellValue('F1', 'pais');
+
 
                         $fila = 2;
 
@@ -103,6 +105,8 @@
                         $sheet->setCellValue("C$fila", $filaDatos['capacitacion']);
                         $sheet->setCellValue("D$fila", $filaDatos['fecha']);
                         $sheet->setCellValue("E$fila", $filaDatos['link_certificado']);
+                        $sheet->setCellValue("F$fila", $filaDatos['pais']);
+
 
                         
                         $fila++;

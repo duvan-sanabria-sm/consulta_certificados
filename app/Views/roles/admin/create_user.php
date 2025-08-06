@@ -30,7 +30,6 @@
   <section class="content">
     <div class="container-fluid">
       <div class="card card-primary">
-        <div class="card-header"><h3 class="card-title">Formulario de Registro</h3></div>
           <form action="create" method="post">
               <?= csrf_field() ?>
               <div class="card-body">
