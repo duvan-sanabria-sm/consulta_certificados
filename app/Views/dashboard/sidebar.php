@@ -17,16 +17,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!--Titulo menú-->
         <li class="nav-header">Panel de Administración</li>
-          
-        <!--Lista de ingreso de certificados-->
-        <!--<li class="nav-links active">
-            <a href="<?= route_to('admin/ingreso');?>" class="nav-link">
-              <i class="fa-solid fa-user-plus"></i>
-              <p> Ingreso de certificados</p>
-            </a>
-        </li>-->
-    
-        <!--Lista crud-->
+
         <?php if ($user->inGroup('administrador')) : ?>
         <li class="nav-item">
             <a href="#" class="nav-link">
@@ -35,13 +26,12 @@
             </a>
 
             <ul class="nav nav-treeview">
-            <!--Crear
             <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i><p>Crear usuario</p>
+                <a href="<?= route_to('create-user'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i><p>Crear usuarios</p>
                 </a>
-            </li>-->
-            <!--Editar-->
+            </li>
+
             <li class="nav-item">
                 <a href="<?= route_to('users'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i><p>Editar usuarios</p>

@@ -10,54 +10,38 @@ use CodeIgniter\Router\RouteCollection;
 // RUTAS PÚBLICAS
 // ============================
 
-// Página principal
-$routes->get('/', 'User::index');
+//VISTAS
+$routes->get('/', 'User::index');                                                               // Consultas principales
+$routes->get('log-in', 'LoginController::showViewLogin');                                       // Formulario de ingreso
+$routes->get('consulta/(:alpha)','User::ShowCountryQuery/$1', ['as' => 'consult_country']);     // Consultas por pais
 
-// Vista del formulario de login personalizado
-$routes->get('log-in', 'LoginController::showViewLogin');
-$routes->get('login', 'LoginController::showViewLogin');
-$routes->get('consulta/(:alpha)','User::ShowCountryQuery/$1', ['as' => 'consult_country']);
 
+//SOLICITUDES POST
 $routes->post('certificates_query','User::manageCertificateQuery',['as' => 'cert_query']);
-
-//Registrar cuentas
-//$routes->get('registro','RegisterController::registerUser');
-
 
 // ============================
 // RUTAS ADMINISTRATIVAS (agrupadas en /admin)
 // ============================
-
 $routes->group('admin', function ($routes) {
-    // Mostrar lista de usuarios
-    $routes->get('usuarios', 'UserDataController::showList', ['as' => 'users']);
 
-    // Vista de inicio del panel de administrador
-    $routes->get('inicio', 'AdminController::showViewHome', ['as' => 'home']);
+    //VISTAS
+    $routes->get('usuarios', 'UserDataController::showList', ['as' => 'users']);             // Editar usuarios
+    $routes->get('inicio', 'AdminController::showViewHome', ['as' => 'home']);               // Panel del administrador
+    $routes->get('crear', 'AdminUserController::create', ['as' => 'create-user']);          // Crear usuarios
 
-    // Vista importación de certificados desde archivo
-    $routes->post('certificados', 'ExcelController::import', ['as' => 'certificates']);
-
-    // Actualizar datos de usuario
-    $routes->post('actualizar', 'UserDataController::updateData', ['as' => 'actualizar']);
-
-    //Descargar certificados
-    $routes->post('descarga', 'ExcelController::downoload_report', ['as' => 'informe']);
+    //Solicitudes POST
+    $routes->post('certificados', 'ExcelController::import', ['as' => 'certificates']);     // Importación de certificados
+    $routes->post('actualizar', 'UserDataController::updateData', ['as' => 'actualizar']);  // Actualizar usuarios
+    $routes->post('descarga', 'ExcelController::downoload_report', ['as' => 'informe']);    // Descargar reportes
+    $routes->post('create', 'AdminUserController::store', ['as' => 'create']);              // Crear usuarios
 });
-
-
 
 // ============================
 // RUTAS DE AUTENTICACIÓN (Shield)
 // ============================
+service('auth')->routes($routes, ['except' => ['login','register']]);                       // Excluir solo las rutas que vamos a personalizar nosotros (GET /login, GET /register)
+$routes->post('login', '\CodeIgniter\Shield\Controllers\LoginController::loginAction');   // Registrar solo la acción de login (POST /login)
 
-// Excluir solo las rutas que vamos a personalizar nosotros (GET /login, GET /register)
-service('auth')->routes($routes, [
-    'except' => ['login','register']
-]);
-
-// Registrar solo la acción de login (POST /login)
-$routes->post('login', '\CodeIgniter\Shield\Controllers\LoginController::loginAction');
 
 // ============================
 // PERSONALIZACIÓN DE ERRORES
