@@ -4,22 +4,21 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddFieldToCertificate extends Migration
+class AddLinkFieldToCertificates extends Migration
 {
     public function up()
     {
-         $this->forge->addColumn('certificado',[
+        $this->forge->addColumn('certificados', [
             'link_certificado' => [
                 'type' => 'VARCHAR',
                 'constraint' => 2048,
-                'null' => true
+                'null' => true,
             ]
-            
         ]);
     }
 
     public function down()
     {
-          $this->forge->dropColumn('certificado', 'link_certificado');
+        $this->forge->dropColumn('certificados', 'link_certificado');
     }
 }

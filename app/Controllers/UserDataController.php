@@ -17,25 +17,24 @@ class UserDataController extends BaseController
         $this->session = service('session');
     }
 
-
     //Método para mostrar a todos los usuarios
     public function showList() 
     {
-       
         $model = new UserData();
+        $records = $model->getDataGroup();
+        $user = auth()->user(); 
 
-        $data['records'] = $model->getDataGroup();
+        $message = empty($records)? 'No se encontraron registros': null;
 
-        if (empty($data['records'])) {
-            return "No se encontraron registros";
+        if(auth()->loggedIn()){
+            return view('roles/admin/create', [
+            'user' => $user, 
+            'records' => $records,
+            'message' => $message
+            ]);
 
-        } else {
-            $user = auth()->user(); 
-
-            return view('dashboard/header').
-            view('dashboard/sidebar', ['user' => $user]).
-            view('roles/admin/create', $data).
-            view('dashboard/footer');
+        }else {
+            return view('auth/login');
         }
     }
 
@@ -64,10 +63,10 @@ class UserDataController extends BaseController
             $this->session->setFlashdata('error', 'No se encontró un grupo para el usuario');
         }
         
-        return redirect()->to(site_url('admin/editar'));
+        return redirect()->to(site_url('admin/usuarios'));
     }
 
-    //Método para la elimininación de usuarios
+    //Método para la eliminación de usuarios
     public function deleteUser($id)
     {
         $model = new UserData();
