@@ -12,7 +12,7 @@ use CodeIgniter\Router\RouteCollection;
 
 //VISTAS
 $routes->get('/', 'User::index');                                                               // Consultas principales
-$routes->get('log-in', 'LoginController::showViewLogin');                                       // Formulario de ingreso
+$routes->get('log-in', 'LoginController::showViewLogin', ['as' => 'login']);                    // Formulario de ingreso
 $routes->get('consulta/(:alpha)','User::ShowCountryQuery/$1', ['as' => 'consult_country']);     // Consultas por pais
 
 
@@ -40,7 +40,7 @@ $routes->group('admin', function ($routes) {
 // RUTAS DE AUTENTICACIÓN (Shield)
 // ============================
 service('auth')->routes($routes, ['except' => ['login','register']]);                       // Excluir solo las rutas que vamos a personalizar nosotros (GET /login, GET /register)
-$routes->post('login', '\CodeIgniter\Shield\Controllers\LoginController::loginAction');   // Registrar solo la acción de login (POST /login)
+$routes->post('log-in', '\CodeIgniter\Shield\Controllers\LoginController::loginAction');   // Registrar solo la acción de login (POST /login)
 
 
 // ============================
@@ -48,4 +48,4 @@ $routes->post('login', '\CodeIgniter\Shield\Controllers\LoginController::loginAc
 // ============================
 
 // Ruta personalizada para página 404
-//$routes->set404Override('ErrorController::show404');
+$routes->set404Override('ErrorController::show404');
