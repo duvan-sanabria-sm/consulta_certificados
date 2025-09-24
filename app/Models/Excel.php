@@ -17,12 +17,12 @@ class Excel extends Model {
         
 
    //Método para insertar datos para la llave principal por defecto como UUID
-    public function insertWidthUUID(){
+    /*public function insertWidthUUID(){
 
         $uuid =  Uuid::uuid4()->toString();
         $data = ['no_certificado' => $uuid];
         return $data['no_certificado'];
-    }
+    }*/
 
     
     //Método para insertar datos desde el excel
@@ -44,11 +44,11 @@ class Excel extends Model {
                 
                 $model = new \App\Models\Excel();
 
-                $no_certificates = $model->insertWidthUUID();
-                $name            = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
-                $capacitation    = trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex()));
-                $url             = trim($sheet->getCellByColumnAndRow(3,$row->getRowIndex()));
-                $country         = trim($sheet->getCellByColumnAndRow(4,$row->getRowIndex()));
+                $no_certificates = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
+                $name            = trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex()));
+                $capacitation    = trim($sheet->getCellByColumnAndRow(3,$row->getRowIndex()));
+                $url             = trim($sheet->getCellByColumnAndRow(4,$row->getRowIndex()));
+                $country         = trim($sheet->getCellByColumnAndRow(5,$row->getRowIndex()));
                 
                 
                 if($no_certificates == '' || $name == '' || $capacitation == '' || $url == '' ){
