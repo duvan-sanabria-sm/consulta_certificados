@@ -47,11 +47,11 @@ class Excel extends Model {
                 $no_certificates = trim($sheet->getCellByColumnAndRow(1,$row->getRowIndex()));
                 $name            = trim($sheet->getCellByColumnAndRow(2,$row->getRowIndex()));
                 $capacitation    = trim($sheet->getCellByColumnAndRow(3,$row->getRowIndex()));
-                $url             = trim($sheet->getCellByColumnAndRow(4,$row->getRowIndex()));
-                $country         = trim($sheet->getCellByColumnAndRow(5,$row->getRowIndex()));
+                //$url             = trim($sheet->getCellByColumnAndRow(4,$row->getRowIndex()));
+                $country         = trim($sheet->getCellByColumnAndRow(4,$row->getRowIndex()));
                 
                 
-                if($no_certificates == '' || $name == '' || $capacitation == '' || $url == '' ){
+                if($no_certificates == '' || $name == '' || $capacitation == ''){
                     continue;
                 }
 
@@ -60,7 +60,7 @@ class Excel extends Model {
                     'no_certificado'   => $no_certificates, 
                     'nombre'           => $name, 
                     'capacitacion'     => $capacitation, 
-                    'link_certificado' => $url,
+                    //'link_certificado' => $url,
                     'fecha'            => date('Y-m-d'),
                     'pais'             => $country
                 ];
